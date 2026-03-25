@@ -81,7 +81,6 @@
             position: relative;
         }
 
-        /* Pulsing indicator if music is paused */
         .disc::after {
             content: "🎵";
             position: absolute;
@@ -135,9 +134,9 @@
 
         .letter-content {
             font-family: 'Playfair Display', serif;
-            line-height: 2.2rem;
+            line-height: 1.8;
             text-align: left;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #333;
         }
 
@@ -173,8 +172,6 @@
             box-shadow: 0 8px 20px rgba(124,161,180,0.25);
         }
 
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(124,161,180,0.4); }
-
         .invite-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; }
         .invite-table td { padding: 15px 8px; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }
         .time { color: var(--wave-blue); font-weight: 700; width: 90px; }
@@ -183,7 +180,7 @@
 <body class="music-paused">
 
     <audio id="badSong" loop preload="auto">
-        <source src="bad.mp3" type="audio/mp3">
+        <source src="https://files.catbox.moe/9p6z7p.mp3" type="audio/mp3">
     </audio>
 
     <div id="landing">
@@ -203,23 +200,22 @@
         
         <div id="page1" class="page active">
             <span class="cursive">March 29th...</span>
-            <h1>A Special Soul Was Born</h1>
+            <h1>To My Dearest Sayang</h1>
             
             <div class="letter-paper">
                 <div class="letter-content">
                     My dearest Sayang,<br><br>
-                    I was listening to <i>Bad</i> earlier, and I realized how much you feel like a beautiful melody in a world that is often way too loud. 
-                    <br><br>
-                    Happy (belated) Birthday, Harith. I know I’m a few days late, but you aren't just a single date on a calendar to me. You are the peace I find in the middle of a chaotic day. You are the home I never want to leave.
-                    <br><br>
-                    Thank you for being my constant. I celebrate you today, tomorrow, and every day that I’m lucky enough to be yours.
-                    <br><br>
-                    <span style="float: right; font-family: 'Dancing Script'; font-size: 1.7rem; color: var(--wave-blue);">Always yours, Me.</span>
+                    I’m really thankful to have you in my life. Sometimes I stop and wonder how I got so lucky to walk this path with you, but then I realize—you aren't just a part of my life; you are the very heart of it.<br><br>
+                    To the world, you might be one person, but to me, you are the peace in my chaos, the melody in my silence, and the only home I ever want to return to.<br><br>
+                    Thank you for every sacrifice you make for me and for every ounce of effort you put in because of us. Thank you for always having my back, ready to support me any time and any day without hesitation. You are my constant, my anchor, and my greatest "thank you" to the universe. I don't just love you for who you are, but for the way you make the whole world feel right just by being in it.<br><br>
+                    Happy Birthday, sayang. As March 29th approaches, I find myself more and more grateful that this world was gifted with you. You aren't just a date on the calendar to me—you are my every day.<br><br>
+                    I am yours, today and for every tomorrow we haven't even met yet.<br><br>
+                    <span style="float: right; font-family: 'Dancing Script'; font-size: 1.7rem; color: var(--wave-blue);">Always yours, Me</span>
                 </div>
             </div>
 
-            <div class="card" style="background:var(--glass); border-radius:35px; padding:30px; width:100%; max-width:450px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid white;">
-                <h3 style="font-size: 1.05rem; margin-bottom: 20px;">10 Reasons You're My World</h3>
+            <div class="card" style="background:var(--glass); border-radius:35px; padding:30px; width:100%; max-width:450px; border: 1px solid white;">
+                <h3 style="font-size: 1.05rem; margin-bottom: 20px; text-align: center;">10 Reasons You're My World</h3>
                 <div id="reasonGrid" style="display: flex; flex-wrap: wrap; justify-content: center;"></div>
                 <p id="reasonText" style="margin-top:25px; font-style: italic; color: var(--wave-blue); min-height: 50px; font-size: 0.9rem; text-align: center;">Pick a number, Sayang...</p>
             </div>
@@ -262,20 +258,17 @@
         const disc = document.getElementById('disc');
 
         async function startExperience() {
-            // Interactive sequence to bypass browser audio blocks
             alert("Wait... before you enter.");
             alert("I have a secret to tell you.");
             alert("You are the best thing that ever happened to me.");
             
             document.getElementById('landing').style.transform = 'translateY(-100%)';
             
-            // Start Music
             song.play().then(() => {
                 document.body.classList.remove('music-paused');
                 disc.style.animationPlayState = 'running';
             }).catch(() => {
-                // If it fails, the pulsing indicator will show
-                console.log("Audio blocked by browser.");
+                console.log("Audio blocked.");
             });
         }
 
@@ -304,7 +297,6 @@
 
         function confirmRSVP() {
             alert("Yay! I can't wait to see you on the 4th, Sayang! ❤️");
-            // Change YOUR_PHONE to your actual number (e.g., 60123456789)
             window.location.href = "https://wa.me/YOUR_PHONE?text=I%20accept!%20See%20you%20Sayang!%20❤️";
         }
 
