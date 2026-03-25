@@ -21,11 +21,11 @@
             font-family: 'Poppins', sans-serif;
             background-color: #fdfaf7;
             color: #2c2c2c;
-            overflow: hidden;
+            overflow-x: hidden; /* Changed from hidden to allow vertical scrolling on small screens */
             touch-action: manipulation;
         }
 
-        /* --- LANDING PAGE --- */
+        /* --- FLUID CONTAINERS --- */
         #landing {
             position: fixed; inset: 0;
             background-color: #2c080b;
@@ -35,15 +35,15 @@
             z-index: 2000; display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
-            text-align: center; padding: 20px;
+            text-align: center; padding: 5vw;
         }
 
         .envelope-wrapper {
-            font-size: clamp(3.5rem, 12vw, 5rem);
+            font-size: clamp(4rem, 15vw, 7rem);
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
             animation: elegantFloat 5s ease-in-out infinite;
             cursor: pointer;
-            margin-bottom: 30px;
+            margin-bottom: 2vh;
         }
 
         @keyframes elegantFloat { 
@@ -52,29 +52,31 @@
         }
 
         .landing-countdown {
-            display: flex; gap: 15px; margin-bottom: 30px;
+            display: flex; gap: 10px; margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.05);
-            padding: 15px 20px; border-radius: 2px;
+            padding: 10px 15px; border-radius: 4px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(184, 146, 106, 0.3);
+            max-width: 90%;
         }
-        .unit { text-align: center; min-width: 50px; }
-        .num { display: block; font-weight: 500; font-size: 1.2rem; color: #fdfaf7; letter-spacing: 1px; }
-        .lab { font-size: 0.6rem; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; }
+        .unit { text-align: center; flex: 1; min-width: 45px; }
+        .num { display: block; font-weight: 500; font-size: clamp(1rem, 4vw, 1.4rem); color: #fdfaf7; letter-spacing: 1px; }
+        .lab { font-size: 0.55rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; }
 
         /* --- PLAYER --- */
         .music-player {
-            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            position: fixed; top: 15px; right: 15px; z-index: 1000;
             display: flex; align-items: center; background: var(--glass);
-            padding: 6px 15px 6px 6px; border-radius: 4px;
+            padding: 5px 12px 5px 5px; border-radius: 50px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             border: 1px solid rgba(184, 146, 106, 0.2);
             backdrop-filter: blur(8px);
+            max-width: 150px;
         }
         .disc {
-            width: 35px; height: 35px; background: var(--primary); border-radius: 50%;
+            width: 30px; height: 30px; background: var(--primary); border-radius: 50%;
             display: flex; align-items: center; justify-content: center; color: var(--accent);
-            font-size: 10px; animation: spin 4s linear infinite;
+            font-size: 8px; animation: spin 4s linear infinite;
             animation-play-state: paused; border: 1px solid var(--accent);
         }
         @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
@@ -82,7 +84,7 @@
         /* --- PAGES --- */
         .page-container { width: 100%; height: 100%; position: relative; }
         .page {
-            position: absolute; inset: 0; padding: 80px 20px 40px;
+            position: absolute; inset: 0; padding: 70px 5% 40px;
             box-sizing: border-box; overflow-y: auto;
             display: flex; flex-direction: column; align-items: center;
             transition: 0.9s cubic-bezier(0.65, 0, 0.35, 1);
@@ -95,32 +97,37 @@
             background-color: var(--paper);
             background-image: linear-gradient(rgba(254, 247, 233, 0.6), rgba(254, 247, 233, 0.8)),
                 url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiIHZpZXdCb3g9IjAgMCA0IDQiPjxnIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2I4OTI2YSIgZmlsbC1vcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMCAwaDF2MUgwVjB6bTIgMGgxdjFIMlYwek0wIDJoMXYxSDBWMnpNMiAyaDF2MUgyVjJ6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            border-radius: 2px; padding: 40px 30px;
-            width: 100%; max-width: 450px; 
+            border-radius: 2px; padding: clamp(20px, 8vw, 40px);
+            width: 90%; max-width: 450px; 
             box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
             margin-bottom: 30px; position: relative;
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 15px 0; color: var(--primary); font-weight: 700; text-align: center; }
-        .cursive { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--accent); }
-        .letter-content { font-family: 'Playfair Display', serif; line-height: 1.8; font-size: 1.05rem; color: #3d3d3d; text-align: justify; }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 5vw, 1.8rem); margin: 15px 0; color: var(--primary); font-weight: 700; text-align: center; }
+        .cursive { font-family: 'Dancing Script', cursive; font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--accent); }
+        .letter-content { font-family: 'Playfair Display', serif; line-height: 1.6; font-size: clamp(0.95rem, 3.5vw, 1.1rem); color: #3d3d3d; text-align: justify; }
 
         /* --- REASONS GRID --- */
         .reasons-stack {
-            width: 100%; max-width: 450px; margin-bottom: 30px;
+            width: 90%; max-width: 450px; margin-bottom: 30px;
             position: relative; padding: 20px;
             background: var(--paper); border: 1px solid rgba(184, 146, 106, 0.2);
             box-shadow: 10px 10px 30px rgba(0,0,0,0.03);
+            box-sizing: border-box;
         }
-        .stack-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; text-align: center; color: var(--accent); margin-bottom: 20px; }
+        .stack-title { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; text-align: center; color: var(--accent); margin-bottom: 20px; }
 
-        #miniGrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+        #miniGrid { 
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            gap: clamp(5px, 2vw, 12px); 
+        }
 
         .mini-envelope {
             aspect-ratio: 1.3; background: #fff6e8; border: 1px solid rgba(184, 146, 106, 0.4);
             cursor: pointer; position: relative; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 1.1rem;
+            font-family: 'Dancing Script', cursive; color: var(--accent); font-size: clamp(0.8rem, 3vw, 1.1rem);
         }
         .mini-envelope::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
@@ -131,13 +138,13 @@
 
         /* --- POPUP --- */
         #reasonPopup {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
             z-index: 1500; display: flex; align-items: center; justify-content: center;
             opacity: 0; pointer-events: none; transition: 0.5s;
         }
         #reasonPopup.active { opacity: 1; pointer-events: auto; }
         .popup-paper {
-            background-color: var(--paper); padding: 40px 30px; width: 85%; max-width: 380px; 
+            background-color: var(--paper); padding: 30px; width: 80%; max-width: 350px; 
             text-align: center; border: 1px solid var(--accent);
             transform: scale(0.8) rotate(-5deg); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
@@ -145,21 +152,28 @@
         #reasonPopup.active .popup-paper { transform: scale(1) rotate(0deg); }
 
         .btn {
-            background: var(--primary); color: #fff; padding: 15px 35px;
+            background: var(--primary); color: #fff; padding: 12px 30px;
             border: none; font-family: 'Poppins'; letter-spacing: 1px;
-            font-weight: 500; font-size: 0.8rem; cursor: pointer;
+            font-weight: 500; font-size: 0.75rem; cursor: pointer;
             text-transform: uppercase; width: fit-content; margin: 0 auto; display: block;
             transition: 0.3s;
         }
-        .btn:hover { background: #4a0a12; letter-spacing: 2px; }
+        .btn:hover { background: #4a0a12; transform: translateY(-2px); }
 
         .wax-seal {
-            font-size: 1.3rem; color: #fff; background: var(--primary);
-            width: 45px; height: 45px; border-radius: 50%;
+            font-size: 1.1rem; color: #fff; background: var(--primary);
+            width: 40px; height: 40px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            position: absolute; right: 20px; bottom: 20px;
+            position: absolute; right: 15px; bottom: 15px;
             border: 2px solid var(--paper); box-shadow: 0 4px 10px rgba(107, 15, 26, 0.4);
             font-family: 'Dancing Script', cursive; font-weight: bold;
+        }
+
+        /* Adjustments for very small screens */
+        @media (max-height: 600px) {
+            .page { padding-top: 60px; }
+            .letter-paper { padding: 20px; }
+            h1 { margin: 5px 0; }
         }
     </style>
 </head>
@@ -177,7 +191,7 @@
 
     <div id="landing">
         <div class="envelope-wrapper" onclick="startExperience()">✉️</div>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.7rem; letter-spacing: 3px; margin: 0 0 5px; text-transform: uppercase;">Private Invitation</p>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.6rem; letter-spacing: 3px; margin: 0 0 5px; text-transform: uppercase;">Private Invitation</p>
         <h2 class="cursive" style="margin-bottom: 25px; color: var(--accent);">Harith Haziq</h2>
         
         <div class="landing-countdown" id="bdayTimer">
@@ -192,7 +206,7 @@
 
     <div class="music-player" onclick="toggleMusic()">
         <div class="disc" id="disc">W2E</div>
-        <div style="margin-left: 12px; font-size: 0.65rem; color: #555;">
+        <div style="margin-left: 10px; font-size: 0.6rem; color: #555; white-space: nowrap; overflow: hidden;">
             <b style="color: var(--primary);">Bad</b><br>Wave to Earth
         </div>
     </div>
@@ -211,7 +225,7 @@
                     Happy Birthday, sayang. As March 29th approaches, I’m so grateful the world was gifted with you.<br><br>
                     I am yours, today and for every tomorrow.
                 </div>
-                <p style="text-align: right; margin-top: 30px; color: var(--primary); font-family: 'Dancing Script'; font-size: 1.5rem;">Always yours, Me</p>
+                <p style="text-align: right; margin-top: 30px; color: var(--primary); font-family: 'Dancing Script'; font-size: 1.4rem;">Always yours, Me</p>
             </div>
 
             <div class="reasons-stack">
@@ -228,14 +242,14 @@
             <div class="letter-paper">
                 <h1>April 4, 2026</h1>
                 <div style="text-align: center; border: 1px dashed rgba(184, 146, 106, 0.4); padding: 15px; margin-bottom: 25px; background: #fff6e8;">
-                    <p style="color: var(--primary); font-weight: 500; font-size: 1.1rem; letter-spacing: 1px; margin:0;">
-                        <span id="days2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">D</span> &nbsp; <span id="hours2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">H</span> &nbsp; <span id="mins2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">M</span> &nbsp; <span id="secs2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">S</span>
+                    <p style="color: var(--primary); font-weight: 500; font-size: 1rem; letter-spacing: 1px; margin:0;">
+                        <span id="days2">00</span> <span style="font-size: 0.6rem; color: #8e6c4c;">D</span> &nbsp; <span id="hours2">00</span> <span style="font-size: 0.6rem; color: #8e6c4c;">H</span> &nbsp; <span id="mins2">00</span> <span style="font-size: 0.6rem; color: #8e6c4c;">M</span> &nbsp; <span id="secs2">00</span> <span style="font-size: 0.6rem; color: #8e6c4c;">S</span>
                     </p>
                 </div>
                 <div style="border-left: 2px solid var(--accent); padding-left: 15px; margin: 25px 0; color: #3d3d3d; font-family: 'Playfair Display';">
-                    <p style="font-size: 0.95rem; margin: 8px 0;">📍 <b>Venue:</b> [Insert Your Venue]</p>
-                    <p style="font-size: 0.95rem; margin: 8px 0;">👔 <b>Attire:</b> Smart Casual / Elegant</p>
-                    <p style="font-size: 0.95rem; margin: 8px 0;">🕗 <b>Time:</b> 08:00 PM onwards</p>
+                    <p style="font-size: 0.9rem; margin: 8px 0;">📍 <b>Venue:</b> [Insert Your Venue]</p>
+                    <p style="font-size: 0.9rem; margin: 8px 0;">👔 <b>Attire:</b> Smart Casual / Elegant</p>
+                    <p style="font-size: 0.9rem; margin: 8px 0;">🕗 <b>Time:</b> 08:00 PM onwards</p>
                 </div>
                 <div class="wax-seal">HH</div>
             </div>
@@ -253,9 +267,9 @@
 
     <div id="reasonPopup">
         <div class="popup-paper">
-            <span class="cursive" style="font-size: 1.2rem; display: block; margin-bottom: 15px;">Why You're My World</span>
-            <p id="reasonText" style="font-family: 'Playfair Display'; line-height: 1.7; font-style: italic; color: var(--primary); font-size: 1.1rem; min-height: 60px; margin-bottom: 25px;"></p>
-            <button class="btn" style="font-size: 0.7rem; padding: 10px 20px;" onclick="closeReason()">Close Note</button>
+            <span class="cursive" style="font-size: 1.1rem; display: block; margin-bottom: 15px;">Why You're My World</span>
+            <p id="reasonText" style="font-family: 'Playfair Display'; line-height: 1.6; font-style: italic; color: var(--primary); font-size: 1rem; min-height: 50px; margin-bottom: 20px;"></p>
+            <button class="btn" style="font-size: 0.65rem; padding: 10px 20px;" onclick="closeReason()">Close Note</button>
         </div>
     </div>
 
