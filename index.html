@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Letter for Harith Haziq 🌊</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
     <style>
         :root {
@@ -14,7 +15,6 @@
             --glass: rgba(255, 255, 255, 0.94);
         }
 
-        /* Prevent unwanted scrolling on the background */
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
@@ -27,21 +27,16 @@
 
         /* --- LANDING PAGE --- */
         #landing {
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background: linear-gradient(135deg, #fdfaf7 0%, #b7cbd6 100%);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            z-index: 2000; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
-            text-align: center;
-            padding: 20px;
+            text-align: center; padding: 20px;
         }
 
         .envelope-wrapper {
-            font-size: clamp(4rem, 15vw, 6rem); /* Scales with screen size */
+            font-size: clamp(4rem, 15vw, 6rem);
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
             animation: float 4s ease-in-out infinite;
             cursor: pointer;
@@ -52,49 +47,42 @@
             50% { transform: translateY(-15px) rotate(3deg); } 
         }
 
+        /* --- COUNTDOWN STYLE --- */
+        .countdown-box {
+            display: flex; gap: 10px; margin: 15px 0;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 10px 15px; border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+
+        .unit { text-align: center; min-width: 45px; }
+        .num { display: block; font-weight: 600; font-size: 1.1rem; color: var(--wave-blue); }
+        .lab { font-size: 0.55rem; text-transform: uppercase; color: #777; }
+
         /* --- RESPONSIVE PLAYER --- */
         .music-player {
-            position: fixed;
-            top: 10px; right: 10px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            background: var(--glass);
-            padding: 5px 12px 5px 5px;
-            border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            backdrop-filter: blur(8px);
-            border: 1px solid white;
-            max-width: 150px;
+            position: fixed; top: 10px; right: 10px; z-index: 1000;
+            display: flex; align-items: center; background: var(--glass);
+            padding: 5px 12px 5px 5px; border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); backdrop-filter: blur(8px);
+            border: 1px solid white; max-width: 150px;
         }
 
         .disc {
-            width: 32px; height: 32px;
-            background: #111;
-            border-radius: 50%;
-            border: 2px solid var(--sand-gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 7px;
-            animation: spin 3.5s linear infinite;
+            width: 32px; height: 32px; background: #111; border-radius: 50%;
+            border: 2px solid var(--sand-gold); display: flex;
+            align-items: center; justify-content: center; color: white;
+            font-size: 7px; animation: spin 3.5s linear infinite;
             animation-play-state: paused;
         }
-
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         /* --- PAGE SYSTEM --- */
         .page-container { width: 100%; height: 100%; position: relative; }
         .page {
-            position: absolute;
-            inset: 0;
-            padding: 70px 15px 30px; /* Reduced top padding for small phones */
-            box-sizing: border-box;
-            overflow-y: auto; /* Allows internal scroll if content is too tall */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            position: absolute; inset: 0; padding: 70px 15px 30px;
+            box-sizing: border-box; overflow-y: auto;
+            display: flex; flex-direction: column; align-items: center;
             transition: 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
@@ -102,83 +90,42 @@
         .hidden-up { opacity: 0; transform: translateY(-100%); pointer-events: none; }
         .hidden-down { opacity: 0; transform: translateY(100%); pointer-events: none; }
 
-        /* --- LETTER SCALING --- */
         .letter-paper {
-            background: #fff;
-            border-radius: 4px;
-            padding: 25px 20px;
-            width: 95%;
-            max-width: 420px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-            transform: rotate(-0.5deg);
+            background: #fff; border-radius: 4px; padding: 25px 20px;
+            width: 95%; max-width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 20px; transform: rotate(-0.5deg);
         }
 
         h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 5vw, 1.8rem); margin: 10px 0; text-align: center; }
         .cursive { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--wave-blue); }
 
         .letter-content {
-            font-family: 'Playfair Display', serif;
-            line-height: 1.6;
-            font-size: clamp(0.9rem, 4vw, 1.05rem); /* Adjusts text size based on screen width */
-            color: #333;
+            font-family: 'Playfair Display', serif; line-height: 1.6;
+            font-size: clamp(0.9rem, 4vw, 1.05rem); color: #333;
         }
 
         .card {
-            background: var(--glass);
-            border-radius: 20px;
-            padding: 15px;
-            width: 95%;
-            max-width: 420px;
-            border: 1px solid white;
-            margin-bottom: 20px;
+            background: var(--glass); border-radius: 20px; padding: 15px;
+            width: 95%; max-width: 420px; border: 1px solid white; margin-bottom: 20px;
         }
 
-        /* Responsive Grid for Circles */
-        #reasonGrid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-        }
+        #reasonGrid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 
         .reason-circle {
-            width: clamp(35px, 10vw, 42px);
-            height: clamp(35px, 10vw, 42px);
-            border: 1.5px solid var(--wave-blue);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background: white;
-            font-weight: 600;
-            color: var(--wave-blue);
-            font-size: 0.8rem;
+            width: clamp(35px, 10vw, 42px); height: clamp(35px, 10vw, 42px);
+            border: 1.5px solid var(--wave-blue); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; background: white; font-weight: 600;
+            color: var(--wave-blue); font-size: 0.8rem;
         }
 
         .reason-circle.selected { background: var(--wave-blue); color: white; transform: scale(1.1); }
 
         .btn {
-            background: var(--wave-blue);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 50px;
-            border: none;
-            font-family: 'Poppins';
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            width: fit-content;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Media Query for very small phones (like older iPhones) */
-        @media (max-height: 600px) {
-            .page { padding-top: 60px; }
-            .letter-paper { padding: 15px; }
-            h1 { font-size: 1.1rem; }
-            .letter-content { font-size: 0.85rem; line-height: 1.4; }
+            background: var(--wave-blue); color: white; padding: 14px 30px;
+            border-radius: 50px; border: none; font-family: 'Poppins';
+            font-weight: 600; font-size: 0.85rem; cursor: pointer;
+            width: fit-content; -webkit-tap-highlight-color: transparent;
         }
 
         .invite-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
@@ -192,9 +139,25 @@
         <source src="bad.mp3" type="audio/mp3">
     </audio>
 
+    <audio id="sparkleSfx" preload="auto">
+        <source src="https://pixabay.com/static/audio/2022/03/15/audio_24911d3395.mp3" type="audio/mp3">
+    </audio>
+
+    <audio id="successSfx" preload="auto">
+        <source src="https://pixabay.com/static/audio/2021/08/04/audio_0625c1539c.mp3" type="audio/mp3">
+    </audio>
+
     <div id="landing">
         <div class="envelope-wrapper" onclick="startExperience()">💌</div>
-        <h2 class="cursive" style="margin-bottom: 20px; color: #fff;">For Harith Haziq</h2>
+        <h2 class="cursive" style="margin-bottom: 10px; color: #2c3e50;">For Harith Haziq</h2>
+        
+        <div class="countdown-box" id="bdayTimer">
+            <div class="unit"><span class="num" id="days1">00</span><span class="lab">Days</span></div>
+            <div class="unit"><span class="num" id="hours1">00</span><span class="lab">Hrs</span></div>
+            <div class="unit"><span class="num" id="mins1">00</span><span class="lab">Min</span></div>
+            <div class="unit"><span class="num" id="secs1">00</span><span class="lab">Sec</span></div>
+        </div>
+
         <button class="btn" onclick="startExperience()">Ready, Sayang? ✨</button>
     </div>
 
@@ -206,11 +169,9 @@
     </div>
 
     <div class="page-container">
-        
         <div id="page1" class="page active">
             <span class="cursive">March 29th...</span>
             <h1>To My Dearest Sayang</h1>
-            
             <div class="letter-paper">
                 <div class="letter-content">
                     My dearest Sayang,<br><br>
@@ -222,13 +183,11 @@
                     <span style="float: right; font-family: 'Dancing Script'; font-size: 1.3rem; color: var(--wave-blue);">Always yours, Me</span>
                 </div>
             </div>
-
             <div class="card">
                 <h3 style="font-size: 0.85rem; margin-bottom: 10px; text-align: center;">10 Reasons You're My World</h3>
                 <div id="reasonGrid"></div>
                 <p id="reasonText" style="margin-top:10px; font-style: italic; color: var(--wave-blue); font-size: 0.75rem; text-align: center; min-height: 35px;">Pick a number...</p>
             </div>
-
             <button class="btn" onclick="nextPage()">The Celebration Invite ➔</button>
             <div style="height: 40px; width: 10px;"></div>
         </div>
@@ -236,9 +195,14 @@
         <div id="page2" class="page hidden-down">
             <span class="cursive">The Invitation</span>
             <h1>April 4, 2026</h1>
-
             <div class="letter-paper" style="transform: rotate(0.5deg);">
-                <p style="font-size: 0.85rem; margin: 0; font-weight: 600; text-align: center;">Because one day isn't enough to celebrate you.</p>
+                <p style="font-size: 0.85rem; margin-bottom: 10px; font-weight: 600; text-align: center;">Time until celebration:</p>
+                <div class="countdown-box" style="justify-content: center; margin: 0 auto 15px; background: #fdfaf7;">
+                    <div class="unit"><span class="num" id="days2">00</span><span class="lab">D</span></div>
+                    <div class="unit"><span class="num" id="hours2">00</span><span class="lab">H</span></div>
+                    <div class="unit"><span class="num" id="mins2">00</span><span class="lab">M</span></div>
+                    <div class="unit"><span class="num" id="secs2">00</span><span class="lab">S</span></div>
+                </div>
                 <div style="text-align: left; margin: 15px 0; font-size: 0.8rem; background: #fdfaf7; padding: 12px; border-radius: 12px; border: 1px dashed var(--wave-blue);">
                     <p style="margin: 4px 0;">📍 <b>Location:</b> [Insert Your Venue]</p>
                     <p style="margin: 4px 0;">👔 <b>Dress Code:</b> Smart Casual</p>
@@ -250,10 +214,12 @@
                     <tr><td class="time">10:00 PM</td><td>Just Us ✨</td></tr>
                 </table>
             </div>
-
-            <div style="display: flex; gap: 10px; margin-bottom: 40px;">
-                <button class="btn" style="background:#b2bec3;" onclick="prevPage()">⬅ Back</button>
-                <button class="btn" style="background:#2ecc71;" onclick="confirmRSVP()">Confirm ✅</button>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 40px;">
+                <button class="btn" onclick="setReminder()" style="background: #e67e22;">Set Reminder 🔔</button>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn" style="background:#b2bec3;" onclick="prevPage()">⬅ Back</button>
+                    <button class="btn" style="background:#2ecc71;" onclick="confirmRSVP()">Confirm ✅</button>
+                </div>
             </div>
         </div>
     </div>
@@ -261,6 +227,54 @@
     <script>
         const song = document.getElementById('badSong');
         const disc = document.getElementById('disc');
+        const sparkle = document.getElementById('sparkleSfx');
+        const successSfx = document.getElementById('successSfx');
+
+        const bdayDate = new Date("March 29, 2026 00:00:00").getTime();
+        const partyDate = new Date("April 4, 2026 20:00:00").getTime();
+
+        function updateCountdowns() {
+            const now = new Date().getTime();
+            function updateTimer(target, dId, hId, mId, sId, isBday) {
+                const gap = target - now;
+                if (gap <= 0) { if(isBday) triggerExplosion(); return; }
+                const d = Math.floor(gap / (1000 * 60 * 60 * 24));
+                const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((gap % (1000 * 60)) / 1000);
+                document.getElementById(dId).innerText = d.toString().padStart(2, '0');
+                document.getElementById(hId).innerText = h.toString().padStart(2, '0');
+                document.getElementById(mId).innerText = m.toString().padStart(2, '0');
+                document.getElementById(sId).innerText = s.toString().padStart(2, '0');
+            }
+            updateTimer(bdayDate, 'days1', 'hours1', 'mins1', 'secs1', true);
+            updateTimer(partyDate, 'days2', 'hours2', 'mins2', 'secs2', false);
+        }
+        setInterval(updateCountdowns, 1000);
+
+        function triggerExplosion() {
+            // Play sparkle sound
+            sparkle.currentTime = 0;
+            sparkle.play().catch(() => {});
+            
+            // Ocean theme confetti
+            confetti({
+                particleCount: 150,
+                spread: 80,
+                origin: { y: 0.6 },
+                colors: ['#7ca1b4', '#d4af37', '#ffffff', '#2c3e50', '#b7cbd6']
+            });
+        }
+
+        function setReminder() {
+            if (!("Notification" in window)) {
+                alert("Browser doesn't support reminders, but I'll remind you! ❤️");
+            } else if (Notification.permission === "granted") {
+                alert("Reminder set! I'll ping you before the celebration. ✨");
+            } else {
+                Notification.requestPermission().then(p => { if (p === "granted") alert("Notifications on! ❤️"); });
+            }
+        }
 
         async function startExperience() {
             alert("Wait... before you enter.");
@@ -271,38 +285,25 @@
                 document.body.classList.remove('music-paused');
                 disc.style.animationPlayState = 'running';
             }).catch(() => {});
+            triggerExplosion();
         }
 
         function toggleMusic() {
-            if (song.paused) {
-                song.play();
-                disc.style.animationPlayState = 'running';
-                document.body.classList.remove('music-paused');
-            } else {
-                song.pause();
-                disc.style.animationPlayState = 'paused';
-                document.body.classList.add('music-paused');
-            }
+            if (song.paused) { song.play(); disc.style.animationPlayState = 'running'; }
+            else { song.pause(); disc.style.animationPlayState = 'paused'; }
         }
 
-        function nextPage() {
-            document.getElementById('page1').classList.replace('active', 'hidden-up');
-            document.getElementById('page2').classList.replace('hidden-down', 'active');
-            document.getElementById('page2').scrollTop = 0;
-        }
-
-        function prevPage() {
-            document.getElementById('page2').classList.replace('active', 'hidden-down');
-            document.getElementById('page1').classList.replace('hidden-up', 'active');
-            document.getElementById('page1').scrollTop = 0;
-        }
+        function nextPage() { document.getElementById('page1').classList.replace('active', 'hidden-up'); document.getElementById('page2').classList.replace('hidden-down', 'active'); }
+        function prevPage() { document.getElementById('page2').classList.replace('active', 'hidden-down'); document.getElementById('page1').classList.replace('hidden-up', 'active'); }
 
         function confirmRSVP() {
+            successSfx.currentTime = 0;
+            successSfx.play().catch(() => {});
             alert("Yay! See you on the 4th, Sayang! ❤️");
             window.location.href = "https://wa.me/YOUR_PHONE?text=I%20accept!%20See%20you%20Sayang!%20❤️";
         }
 
-        const reasons = ["Your laugh.", "Your patience.", "Your ambition.", "Your hugs.", "Your voice.", "Your music taste.", "Your intuition.", "Your kindness.", "Your eyes.", "Just you. 💖"];
+        const reasons = ["Your laugh is my absolute favorite sound.", "The way you handle my moods with so much grace.", "Your ambition and the way you dream for us.", "How safe I feel when I'm tucked into your side.", "The way you call me 'Baby' and it sounds like home.", "Your amazing taste in music.", "How you always know what I'm thinking without a word.", "Your quiet kindness that most people never see.", "The way you look at me when I'm not noticing.", "Simply because you are Harith Haziq. 💖"];
         const grid = document.getElementById('reasonGrid');
         reasons.forEach((r, i) => {
             const el = document.createElement('div');
