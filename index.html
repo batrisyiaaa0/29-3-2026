@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Letter for Harith Haziq 🌊</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>A Private Note for Harith Haziq 🌊</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
     <style>
         :root {
-            --wave-blue: #7ca1b4;
-            --deep-ocean: #2c3e50;
-            --sand-gold: #d4af37;
-            --glass: rgba(255, 255, 255, 0.94);
+            --primary: #6b0f1a; /* Deep Burgundy */
+            --accent: #b8926a;  /* Muted Gold */
+            --paper: #fef7e9;   /* Antique Parchment */
+            --glass: rgba(254, 247, 233, 0.9);
         }
 
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
-            background: #e8eff2;
-            color: var(--deep-ocean);
+            background-color: #fdfaf7;
+            color: #2c2c2c;
             overflow: hidden;
             touch-action: manipulation;
         }
@@ -28,199 +28,234 @@
         /* --- LANDING PAGE --- */
         #landing {
             position: fixed; inset: 0;
-            background: linear-gradient(135deg, #fdfaf7 0%, #b7cbd6 100%);
+            background-color: #2c080b;
+            background-image: 
+                linear-gradient(rgba(107, 15, 26, 0.8), rgba(107, 15, 26, 0.9)),
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiIHZpZXdCb3g9IjAgMCA0IDQiPjxnIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iIzVjMDIwOSIgZmlsbC1vcGFjaXR5PSIwLjIyIj48cGF0aCBkPSJNMCAwaDF2MUgwVjB6bTIgMGgxdjFIMlYwek0wIDJoMXYxSDBWMnpNMiAyaDF2MUgyVjJ6Ii8+PC9nPjwvZz48L3N2Zz4=');
             z-index: 2000; display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1);
             text-align: center; padding: 20px;
         }
 
         .envelope-wrapper {
-            font-size: clamp(4rem, 15vw, 6rem);
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-            animation: float 4s ease-in-out infinite;
+            font-size: clamp(3.5rem, 12vw, 5rem);
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
+            animation: elegantFloat 5s ease-in-out infinite;
             cursor: pointer;
+            margin-bottom: 30px;
         }
 
-        @keyframes float { 
-            0%, 100% { transform: translateY(0) rotate(-3deg); } 
-            50% { transform: translateY(-15px) rotate(3deg); } 
+        @keyframes elegantFloat { 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-20px); } 
         }
 
-        /* --- COUNTDOWN STYLE --- */
-        .countdown-box {
-            display: flex; gap: 10px; margin: 15px 0;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 10px 15px; border-radius: 15px;
-            backdrop-filter: blur(5px);
+        .landing-countdown {
+            display: flex; gap: 15px; margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 20px; border-radius: 2px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(184, 146, 106, 0.3);
         }
+        .unit { text-align: center; min-width: 50px; }
+        .num { display: block; font-weight: 500; font-size: 1.2rem; color: #fdfaf7; letter-spacing: 1px; }
+        .lab { font-size: 0.6rem; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; }
 
-        .unit { text-align: center; min-width: 45px; }
-        .num { display: block; font-weight: 600; font-size: 1.1rem; color: var(--wave-blue); }
-        .lab { font-size: 0.55rem; text-transform: uppercase; color: #777; }
-
-        /* --- RESPONSIVE PLAYER --- */
+        /* --- PLAYER --- */
         .music-player {
-            position: fixed; top: 10px; right: 10px; z-index: 1000;
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
             display: flex; align-items: center; background: var(--glass);
-            padding: 5px 12px 5px 5px; border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); backdrop-filter: blur(8px);
-            border: 1px solid white; max-width: 150px;
+            padding: 6px 15px 6px 6px; border-radius: 4px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(184, 146, 106, 0.2);
+            backdrop-filter: blur(8px);
         }
-
         .disc {
-            width: 32px; height: 32px; background: #111; border-radius: 50%;
-            border: 2px solid var(--sand-gold); display: flex;
-            align-items: center; justify-content: center; color: white;
-            font-size: 7px; animation: spin 3.5s linear infinite;
-            animation-play-state: paused;
+            width: 35px; height: 35px; background: var(--primary); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--accent);
+            font-size: 10px; animation: spin 4s linear infinite;
+            animation-play-state: paused; border: 1px solid var(--accent);
         }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
-        /* --- PAGE SYSTEM --- */
+        /* --- PAGES --- */
         .page-container { width: 100%; height: 100%; position: relative; }
         .page {
-            position: absolute; inset: 0; padding: 70px 15px 30px;
+            position: absolute; inset: 0; padding: 80px 20px 40px;
             box-sizing: border-box; overflow-y: auto;
             display: flex; flex-direction: column; align-items: center;
-            transition: 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transition: 0.9s cubic-bezier(0.65, 0, 0.35, 1);
         }
-
-        .active { opacity: 1; transform: translateY(0); pointer-events: all; }
-        .hidden-up { opacity: 0; transform: translateY(-100%); pointer-events: none; }
-        .hidden-down { opacity: 0; transform: translateY(100%); pointer-events: none; }
+        .active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .hidden-up { opacity: 0; transform: translateY(-50px); pointer-events: none; }
+        .hidden-down { opacity: 0; transform: translateY(50px); pointer-events: none; }
 
         .letter-paper {
-            background: #fff; border-radius: 4px; padding: 25px 20px;
-            width: 95%; max-width: 420px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-bottom: 20px; transform: rotate(-0.5deg);
+            background-color: var(--paper);
+            background-image: linear-gradient(rgba(254, 247, 233, 0.6), rgba(254, 247, 233, 0.8)),
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiIHZpZXdCb3g9IjAgMCA0IDQiPjxnIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2I4OTI2YSIgZmlsbC1vcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMCAwaDF2MUgwVjB6bTIgMGgxdjFIMlYwek0wIDJoMXYxSDBWMnpNMiAyaDF2MUgyVjJ6Ii8+PC9nPjwvZz48L3N2Zz4=');
+            border-radius: 2px; padding: 40px 30px;
+            width: 100%; max-width: 450px; 
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+            margin-bottom: 30px; position: relative;
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 5vw, 1.8rem); margin: 10px 0; text-align: center; }
-        .cursive { font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--wave-blue); }
+        h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin: 15px 0; color: var(--primary); font-weight: 700; text-align: center; }
+        .cursive { font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--accent); }
+        .letter-content { font-family: 'Playfair Display', serif; line-height: 1.8; font-size: 1.05rem; color: #3d3d3d; text-align: justify; }
 
-        .letter-content {
-            font-family: 'Playfair Display', serif; line-height: 1.6;
-            font-size: clamp(0.9rem, 4vw, 1.05rem); color: #333;
+        /* --- REASONS GRID --- */
+        .reasons-stack {
+            width: 100%; max-width: 450px; margin-bottom: 30px;
+            position: relative; padding: 20px;
+            background: var(--paper); border: 1px solid rgba(184, 146, 106, 0.2);
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.03);
         }
+        .stack-title { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; text-align: center; color: var(--accent); margin-bottom: 20px; }
 
-        .card {
-            background: var(--glass); border-radius: 20px; padding: 15px;
-            width: 95%; max-width: 420px; border: 1px solid white; margin-bottom: 20px;
-        }
+        #miniGrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
 
-        #reasonGrid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-
-        .reason-circle {
-            width: clamp(35px, 10vw, 42px); height: clamp(35px, 10vw, 42px);
-            border: 1.5px solid var(--wave-blue); border-radius: 50%;
+        .mini-envelope {
+            aspect-ratio: 1.3; background: #fff6e8; border: 1px solid rgba(184, 146, 106, 0.4);
+            cursor: pointer; position: relative; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; align-items: center; justify-content: center;
-            cursor: pointer; background: white; font-weight: 600;
-            color: var(--wave-blue); font-size: 0.8rem;
+            font-family: 'Dancing Script', cursive; color: var(--accent); font-size: 1.1rem;
         }
+        .mini-envelope::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+            background: rgba(184, 146, 106, 0.1); border-bottom: 1px solid rgba(184, 146, 106, 0.2);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .mini-envelope:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-        .reason-circle.selected { background: var(--wave-blue); color: white; transform: scale(1.1); }
+        /* --- POPUP --- */
+        #reasonPopup {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            z-index: 1500; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.5s;
+        }
+        #reasonPopup.active { opacity: 1; pointer-events: auto; }
+        .popup-paper {
+            background-color: var(--paper); padding: 40px 30px; width: 85%; max-width: 380px; 
+            text-align: center; border: 1px solid var(--accent);
+            transform: scale(0.8) rotate(-5deg); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        #reasonPopup.active .popup-paper { transform: scale(1) rotate(0deg); }
 
         .btn {
-            background: var(--wave-blue); color: white; padding: 14px 30px;
-            border-radius: 50px; border: none; font-family: 'Poppins';
-            font-weight: 600; font-size: 0.85rem; cursor: pointer;
-            width: fit-content; -webkit-tap-highlight-color: transparent;
+            background: var(--primary); color: #fff; padding: 15px 35px;
+            border: none; font-family: 'Poppins'; letter-spacing: 1px;
+            font-weight: 500; font-size: 0.8rem; cursor: pointer;
+            text-transform: uppercase; width: fit-content; margin: 0 auto; display: block;
+            transition: 0.3s;
         }
+        .btn:hover { background: #4a0a12; letter-spacing: 2px; }
 
-        .invite-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
-        .invite-table td { padding: 8px 4px; border-bottom: 1px solid #f0f0f0; }
-        .time { color: var(--wave-blue); font-weight: 700; width: 70px; }
+        .wax-seal {
+            font-size: 1.3rem; color: #fff; background: var(--primary);
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            position: absolute; right: 20px; bottom: 20px;
+            border: 2px solid var(--paper); box-shadow: 0 4px 10px rgba(107, 15, 26, 0.4);
+            font-family: 'Dancing Script', cursive; font-weight: bold;
+        }
     </style>
 </head>
-<body class="music-paused">
+<body>
 
     <audio id="badSong" loop preload="auto">
         <source src="bad.mp3" type="audio/mp3">
     </audio>
-
     <audio id="sparkleSfx" preload="auto">
         <source src="https://pixabay.com/static/audio/2022/03/15/audio_24911d3395.mp3" type="audio/mp3">
     </audio>
-
     <audio id="successSfx" preload="auto">
         <source src="https://pixabay.com/static/audio/2021/08/04/audio_0625c1539c.mp3" type="audio/mp3">
     </audio>
 
     <div id="landing">
-        <div class="envelope-wrapper" onclick="startExperience()">💌</div>
-        <h2 class="cursive" style="margin-bottom: 10px; color: #2c3e50;">For Harith Haziq</h2>
+        <div class="envelope-wrapper" onclick="startExperience()">✉️</div>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.7rem; letter-spacing: 3px; margin: 0 0 5px; text-transform: uppercase;">Private Invitation</p>
+        <h2 class="cursive" style="margin-bottom: 25px; color: var(--accent);">Harith Haziq</h2>
         
-        <div class="countdown-box" id="bdayTimer">
+        <div class="landing-countdown" id="bdayTimer">
             <div class="unit"><span class="num" id="days1">00</span><span class="lab">Days</span></div>
             <div class="unit"><span class="num" id="hours1">00</span><span class="lab">Hrs</span></div>
             <div class="unit"><span class="num" id="mins1">00</span><span class="lab">Min</span></div>
             <div class="unit"><span class="num" id="secs1">00</span><span class="lab">Sec</span></div>
         </div>
 
-        <button class="btn" onclick="startExperience()">Ready, Sayang? ✨</button>
+        <button class="btn" style="background: transparent; border: 1px solid var(--accent); color: var(--accent);" onclick="startExperience()">Break Seal & Open Letter</button>
     </div>
 
     <div class="music-player" onclick="toggleMusic()">
         <div class="disc" id="disc">W2E</div>
-        <div style="margin-left: 8px; font-size: 0.6rem; overflow: hidden; white-space: nowrap;">
-            <b>Bad</b><br>Wave to Earth
+        <div style="margin-left: 12px; font-size: 0.65rem; color: #555;">
+            <b style="color: var(--primary);">Bad</b><br>Wave to Earth
         </div>
     </div>
 
     <div class="page-container">
         <div id="page1" class="page active">
-            <span class="cursive">March 29th...</span>
-            <h1>To My Dearest Sayang</h1>
+            <span class="cursive">March 29th, 2026</span>
+            
             <div class="letter-paper">
+                <h1>To My Dearest Sayang</h1>
                 <div class="letter-content">
                     My dearest Sayang,<br><br>
                     I’m really thankful to have you in my life. Sometimes I stop and wonder how I got so lucky to walk this path with you, but then I realize you aren't just a part of my life, you are the very heart of it.<br><br>
                     To the world, you might be one person, but to me, you are the peace in my chaos, the melody in my silence, and the only home I ever want to return to.<br><br>
                     Thank you for every sacrifice you make and for every ounce of effort you put in. You are my constant, my anchor, and my greatest "thank you" to the universe.<br><br>
                     Happy Birthday, sayang. As March 29th approaches, I’m so grateful the world was gifted with you.<br><br>
-                    I am yours, today and for every tomorrow.<br><br>
-                    <span style="float: right; font-family: 'Dancing Script'; font-size: 1.3rem; color: var(--wave-blue);">Always yours, Me</span>
+                    I am yours, today and for every tomorrow.
                 </div>
+                <p style="text-align: right; margin-top: 30px; color: var(--primary); font-family: 'Dancing Script'; font-size: 1.5rem;">Always yours, Me</p>
             </div>
-            <div class="card">
-                <h3 style="font-size: 0.85rem; margin-bottom: 10px; text-align: center;">10 Reasons You're My World</h3>
-                <div id="reasonGrid"></div>
-                <p id="reasonText" style="margin-top:10px; font-style: italic; color: var(--wave-blue); font-size: 0.75rem; text-align: center; min-height: 35px;">Pick a number...</p>
+
+            <div class="reasons-stack">
+                <h3 class="stack-title">10 Reasons You're My World</h3>
+                <div id="miniGrid"></div>
             </div>
-            <button class="btn" onclick="nextPage()">The Celebration Invite ➔</button>
-            <div style="height: 40px; width: 10px;"></div>
+
+            <button class="btn" onclick="nextPage()">Celebration Details ➔</button>
+            <div style="height: 60px;"></div>
         </div>
 
         <div id="page2" class="page hidden-down">
-            <span class="cursive">The Invitation</span>
-            <h1>April 4, 2026</h1>
-            <div class="letter-paper" style="transform: rotate(0.5deg);">
-                <p style="font-size: 0.85rem; margin-bottom: 10px; font-weight: 600; text-align: center;">Time until celebration:</p>
-                <div class="countdown-box" style="justify-content: center; margin: 0 auto 15px; background: #fdfaf7;">
-                    <div class="unit"><span class="num" id="days2">00</span><span class="lab">D</span></div>
-                    <div class="unit"><span class="num" id="hours2">00</span><span class="lab">H</span></div>
-                    <div class="unit"><span class="num" id="mins2">00</span><span class="lab">M</span></div>
-                    <div class="unit"><span class="num" id="secs2">00</span><span class="lab">S</span></div>
+            <span class="cursive">The Celebration</span>
+            <div class="letter-paper">
+                <h1>April 4, 2026</h1>
+                <div style="text-align: center; border: 1px dashed rgba(184, 146, 106, 0.4); padding: 15px; margin-bottom: 25px; background: #fff6e8;">
+                    <p style="color: var(--primary); font-weight: 500; font-size: 1.1rem; letter-spacing: 1px; margin:0;">
+                        <span id="days2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">D</span> &nbsp; <span id="hours2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">H</span> &nbsp; <span id="mins2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">M</span> &nbsp; <span id="secs2">00</span> <span style="font-size: 0.7rem; color: #8e6c4c;">S</span>
+                    </p>
                 </div>
-                <div style="text-align: left; margin: 15px 0; font-size: 0.8rem; background: #fdfaf7; padding: 12px; border-radius: 12px; border: 1px dashed var(--wave-blue);">
-                    <p style="margin: 4px 0;">📍 <b>Location:</b> [Insert Your Venue]</p>
-                    <p style="margin: 4px 0;">👔 <b>Dress Code:</b> Smart Casual</p>
+                <div style="border-left: 2px solid var(--accent); padding-left: 15px; margin: 25px 0; color: #3d3d3d; font-family: 'Playfair Display';">
+                    <p style="font-size: 0.95rem; margin: 8px 0;">📍 <b>Venue:</b> [Insert Your Venue]</p>
+                    <p style="font-size: 0.95rem; margin: 8px 0;">👔 <b>Attire:</b> Smart Casual / Elegant</p>
+                    <p style="font-size: 0.95rem; margin: 8px 0;">🕗 <b>Time:</b> 08:00 PM onwards</p>
                 </div>
-                <table class="invite-table">
-                    <tr><td class="time">08:00 PM</td><td>Surprise Arrival</td></tr>
-                    <tr><td class="time">08:30 PM</td><td>Birthday Dinner</td></tr>
-                    <tr><td class="time">09:30 PM</td><td>Cake & Wishes</td></tr>
-                    <tr><td class="time">10:00 PM</td><td>Just Us ✨</td></tr>
-                </table>
+                <div class="wax-seal">HH</div>
             </div>
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 40px;">
-                <button class="btn" onclick="setReminder()" style="background: #e67e22;">Set Reminder 🔔</button>
+
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 40px;">
+                <button class="btn" onclick="setReminder()" style="background: var(--accent);">Set Reminder 🔔</button>
                 <div style="display: flex; gap: 10px;">
                     <button class="btn" style="background:#b2bec3;" onclick="prevPage()">⬅ Back</button>
-                    <button class="btn" style="background:#2ecc71;" onclick="confirmRSVP()">Confirm ✅</button>
+                    <button class="btn" onclick="confirmRSVP()">Confirm ✅</button>
                 </div>
             </div>
+            <div style="height: 60px;"></div>
+        </div>
+    </div>
+
+    <div id="reasonPopup">
+        <div class="popup-paper">
+            <span class="cursive" style="font-size: 1.2rem; display: block; margin-bottom: 15px;">Why You're My World</span>
+            <p id="reasonText" style="font-family: 'Playfair Display'; line-height: 1.7; font-style: italic; color: var(--primary); font-size: 1.1rem; min-height: 60px; margin-bottom: 25px;"></p>
+            <button class="btn" style="font-size: 0.7rem; padding: 10px 20px;" onclick="closeReason()">Close Note</button>
         </div>
     </div>
 
@@ -233,37 +268,34 @@
         const bdayDate = new Date("March 29, 2026 00:00:00").getTime();
         const partyDate = new Date("April 4, 2026 20:00:00").getTime();
 
-        function updateCountdowns() {
+        function updateTimers() {
             const now = new Date().getTime();
-            function updateTimer(target, dId, hId, mId, sId, isBday) {
+            function updateTimer(target, dId, hId, mId, sId) {
                 const gap = target - now;
-                if (gap <= 0) { if(isBday) triggerExplosion(); return; }
-                const d = Math.floor(gap / (1000 * 60 * 60 * 24));
-                const h = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((gap % (1000 * 60)) / 1000);
-                document.getElementById(dId).innerText = d.toString().padStart(2, '0');
-                document.getElementById(hId).innerText = h.toString().padStart(2, '0');
-                document.getElementById(mId).innerText = m.toString().padStart(2, '0');
-                document.getElementById(sId).innerText = s.toString().padStart(2, '0');
+                if (gap <= 0) return;
+                document.getElementById(dId).innerText = Math.floor(gap / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById(hId).innerText = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById(mId).innerText = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById(sId).innerText = Math.floor((gap % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }
-            updateTimer(bdayDate, 'days1', 'hours1', 'mins1', 'secs1', true);
-            updateTimer(partyDate, 'days2', 'hours2', 'mins2', 'secs2', false);
+            updateTimer(bdayDate, 'days1', 'hours1', 'mins1', 'secs1');
+            updateTimer(partyDate, 'days2', 'hours2', 'mins2', 'secs2');
         }
-        setInterval(updateCountdowns, 1000);
+        setInterval(updateTimers, 1000);
 
-        function triggerExplosion() {
-            // Play sparkle sound
+        async function startExperience() {
+            alert("Wait... before you enter.");
+            alert("I have a secret to tell you.");
+            alert("You are the best thing that ever happened to me.");
+            document.getElementById('landing').style.transform = 'translateY(-100%)';
+            song.play().then(() => { disc.style.animationPlayState = 'running'; }).catch(() => {});
+            triggerConfetti();
+        }
+
+        function triggerConfetti() {
             sparkle.currentTime = 0;
             sparkle.play().catch(() => {});
-            
-            // Ocean theme confetti
-            confetti({
-                particleCount: 150,
-                spread: 80,
-                origin: { y: 0.6 },
-                colors: ['#7ca1b4', '#d4af37', '#ffffff', '#2c3e50', '#b7cbd6']
-            });
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#6b0f1a', '#b8926a', '#fef7e9', '#2c3e50'] });
         }
 
         function setReminder() {
@@ -274,18 +306,6 @@
             } else {
                 Notification.requestPermission().then(p => { if (p === "granted") alert("Notifications on! ❤️"); });
             }
-        }
-
-        async function startExperience() {
-            alert("Wait... before you enter.");
-            alert("I have a secret to tell you.");
-            alert("You are the best thing that ever happened to me.");
-            document.getElementById('landing').style.transform = 'translateY(-100%)';
-            song.play().then(() => {
-                document.body.classList.remove('music-paused');
-                disc.style.animationPlayState = 'running';
-            }).catch(() => {});
-            triggerExplosion();
         }
 
         function toggleMusic() {
@@ -303,19 +323,32 @@
             window.location.href = "https://wa.me/YOUR_PHONE?text=I%20accept!%20See%20you%20Baby!%20❤️";
         }
 
-        const reasons = ["Your laugh is my absolute favorite sound.", "The way you handle my moods with so much grace.", "Your ambition and the way you dream for us.", "How safe I feel when I'm tucked into your side.", "The way you call me 'Baby' and it sounds like home.", "Your amazing taste in music.", "How you always know what I'm thinking without a word.", "Your quiet kindness that most people never see.", "The way you look at me when I'm not noticing.", "Simply because you are Harith Haziq. 💖"];
-        const grid = document.getElementById('reasonGrid');
+        const reasons = [
+            "Your laugh is my absolute favorite sound.", 
+            "The way you handle my moods with so much grace.", 
+            "Your ambition and the way you dream for us.", 
+            "How safe I feel when I'm tucked into your side.", 
+            "The way you call me 'Baby' and it sounds like home.", 
+            "Your amazing taste in music.", 
+            "How you always know what I'm thinking without a word.", 
+            "Your quiet kindness that most people never see.", 
+            "The way you look at me when I'm not noticing.", 
+            "Simply because you are Harith Haziq. 💖"
+        ];
+
+        const grid = document.getElementById('miniGrid');
         reasons.forEach((r, i) => {
             const el = document.createElement('div');
-            el.className = 'reason-circle';
+            el.className = 'mini-envelope';
             el.innerText = i + 1;
             el.onclick = () => {
-                document.querySelectorAll('.reason-circle').forEach(c => c.classList.remove('selected'));
-                el.classList.add('selected');
                 document.getElementById('reasonText').innerText = r;
+                document.getElementById('reasonPopup').classList.add('active');
             };
             grid.appendChild(el);
         });
+
+        function closeReason() { document.getElementById('reasonPopup').classList.remove('active'); }
     </script>
 </body>
 </html>
