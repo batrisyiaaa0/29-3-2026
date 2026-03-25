@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter for Harith Haziq 🌊</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --wave-blue: #7ca1b4;
+            --deep-ocean: #2c3e50;
+            --sand-gold: #d4af37;
+            --soft-cream: #fdfaf7;
+            --glass: rgba(255, 255, 255, 0.92);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: #e8eff2;
+            color: var(--deep-ocean);
+            overflow: hidden;
+        }
+
+        /* --- LANDING PAGE --- */
+        #landing {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #fdfaf7 0%, #b7cbd6 100%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .envelope-wrapper {
+            font-size: 5.5rem;
+            filter: drop-shadow(0 15px 20px rgba(0,0,0,0.1));
+            animation: float 4s ease-in-out infinite;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        @keyframes float { 
+            0%, 100% { transform: translateY(0) rotate(-3deg); } 
+            50% { transform: translateY(-25px) rotate(3deg); } 
+        }
+
+        /* --- MUSIC PLAYER --- */
+        .music-player {
+            position: fixed;
+            top: 20px; right: 20px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background: var(--glass);
+            padding: 8px 18px 8px 8px;
+            border-radius: 50px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid white;
+            cursor: pointer;
+        }
+
+        .disc {
+            width: 42px; height: 42px;
+            background: #111;
+            border-radius: 50%;
+            border: 2.5px solid var(--sand-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 9px;
+            animation: spin 3.5s linear infinite;
+            animation-play-state: paused;
+            position: relative;
+        }
+
+        /* Pulsing indicator if music is paused */
+        .disc::after {
+            content: "🎵";
+            position: absolute;
+            font-size: 10px;
+            top: -5px; right: -5px;
+            display: none;
+        }
+        .music-paused .disc::after { display: block; animation: heartbeat 1s infinite; }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+        /* --- PAGE SYSTEM --- */
+        .page-container { width: 100%; height: 100%; position: relative; }
+        .page {
+            position: absolute;
+            inset: 0;
+            padding: 90px 25px 40px;
+            box-sizing: border-box;
+            overflow-y: auto;
+            transition: 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .active { opacity: 1; transform: translateY(0); pointer-events: all; }
+        .hidden-up { opacity: 0; transform: translateY(-100%); pointer-events: none; }
+        .hidden-down { opacity: 0; transform: translateY(100%); pointer-events: none; }
+
+        /* --- LOVE LETTER PAPER --- */
+        .letter-paper {
+            background: #fff;
+            background-image: linear-gradient(#f1f1f1 1.2px, transparent 1.2px);
+            background-size: 100% 2.2rem;
+            border-radius: 2px;
+            padding: 45px 35px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 10px 20px 40px rgba(0,0,0,0.06);
+            margin-bottom: 30px;
+            position: relative;
+            transform: rotate(-1.5deg);
+            animation: gentle-sway 8s ease-in-out infinite;
+        }
+
+        @keyframes gentle-sway { 0%, 100% { transform: rotate(-1.5deg); } 50% { transform: rotate(1.5deg); } }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-ocean); margin: 15px 0; font-weight: 700; }
+        .cursive { font-family: 'Dancing Script', cursive; font-size: 1.9rem; color: var(--wave-blue); }
+
+        .letter-content {
+            font-family: 'Playfair Display', serif;
+            line-height: 2.2rem;
+            text-align: left;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .reason-circle {
+            width: 45px; height: 45px;
+            border: 1.5px solid var(--wave-blue);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 6px;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: white;
+            font-weight: 600;
+            color: var(--wave-blue);
+        }
+
+        .reason-circle.selected { background: var(--wave-blue); color: white; transform: scale(1.15); box-shadow: 0 5px 15px rgba(124,161,180,0.3); }
+
+        .btn {
+            background: var(--wave-blue);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 50px;
+            border: none;
+            font-family: 'Poppins';
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(124,161,180,0.25);
+        }
+
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(124,161,180,0.4); }
+
+        .invite-table { width: 100%; border-collapse: collapse; margin-top: 20px; text-align: left; }
+        .invite-table td { padding: 15px 8px; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }
+        .time { color: var(--wave-blue); font-weight: 700; width: 90px; }
+    </style>
+</head>
+<body class="music-paused">
+
+    <audio id="badSong" loop preload="auto">
+        <source src="https://files.catbox.moe/9p6z7p.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="landing">
+        <div class="envelope-wrapper" onclick="startExperience()">💌</div>
+        <h2 class="cursive" style="margin-bottom: 35px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.1);">For Harith Haziq</h2>
+        <button class="btn" onclick="startExperience()">Ready, Sayang? ✨</button>
+    </div>
+
+    <div class="music-player" id="playerTrigger" onclick="toggleMusic()">
+        <div class="disc" id="disc">W2E</div>
+        <div style="margin-left: 14px; font-size: 0.75rem; line-height: 1.3;">
+            <b id="trackName">Bad</b><br><span style="color: #777;">Wave to Earth</span>
+        </div>
+    </div>
+
+    <div class="page-container">
+        
+        <div id="page1" class="page active">
+            <span class="cursive">March 29th...</span>
+            <h1>A Special Soul Was Born</h1>
+            
+            <div class="letter-paper">
+                <div class="letter-content">
+                    My dearest Sayang,<br><br>
+                    I was listening to <i>Bad</i> earlier, and I realized how much you feel like a beautiful melody in a world that is often way too loud. 
+                    <br><br>
+                    Happy (belated) Birthday, Harith. I know I’m a few days late, but you aren't just a single date on a calendar to me. You are the peace I find in the middle of a chaotic day. You are the home I never want to leave.
+                    <br><br>
+                    Thank you for being my constant. I celebrate you today, tomorrow, and every day that I’m lucky enough to be yours.
+                    <br><br>
+                    <span style="float: right; font-family: 'Dancing Script'; font-size: 1.7rem; color: var(--wave-blue);">Always yours, Me.</span>
+                </div>
+            </div>
+
+            <div class="card" style="background:var(--glass); border-radius:35px; padding:30px; width:100%; max-width:450px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid white;">
+                <h3 style="font-size: 1.05rem; margin-bottom: 20px;">10 Reasons You're My World</h3>
+                <div id="reasonGrid" style="display: flex; flex-wrap: wrap; justify-content: center;"></div>
+                <p id="reasonText" style="margin-top:25px; font-style: italic; color: var(--wave-blue); min-height: 50px; font-size: 0.9rem; text-align: center;">Pick a number, Sayang...</p>
+            </div>
+
+            <button class="btn" onclick="nextPage()">The Celebration Invite ➔</button>
+            <div style="height: 50px;"></div>
+        </div>
+
+        <div id="page2" class="page hidden-down">
+            <span class="cursive">The Invitation</span>
+            <h1>April 4, 2026</h1>
+
+            <div class="letter-paper" style="transform: rotate(1.5deg); background-image: none;">
+                <p style="font-size: 0.95rem; margin-top: 0; font-weight: 500;">Because one day isn't enough to celebrate the most important person in my life.</p>
+                
+                <div style="text-align: left; margin: 25px 0; font-size: 0.9rem; background: #fdfaf7; padding: 20px; border-radius: 18px; border: 1px dashed var(--wave-blue);">
+                    <p style="margin: 8px 0;">📍 <b>Location:</b> [Insert Your Venue]</p>
+                    <p style="margin: 8px 0;">👔 <b>Dress Code:</b> Smart Casual & Your handsome self</p>
+                </div>
+
+                <h4 style="color: var(--wave-blue); border-bottom: 2.5px solid #f9f9f9; padding-bottom: 8px; margin-bottom: 8px;">The Tentative</h4>
+                <table class="invite-table">
+                    <tr><td class="time">08:00 PM</td><td>A Small Surprise Arrival</td></tr>
+                    <tr><td class="time">08:30 PM</td><td>The Birthday Dinner</td></tr>
+                    <tr><td class="time">09:30 PM</td><td>Cake & Sweet Wishes</td></tr>
+                    <tr><td class="time">10:00 PM</td><td>Just Us ✨</td></tr>
+                </table>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-bottom: 65px;">
+                <button class="btn" style="background:#b2bec3;" onclick="prevPage()">⬅ Back</button>
+                <button class="btn" style="background:#2ecc71;" onclick="confirmRSVP()">Confirm RSVP ✅</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const song = document.getElementById('badSong');
+        const disc = document.getElementById('disc');
+
+        async function startExperience() {
+            // Interactive sequence to bypass browser audio blocks
+            alert("Wait... before you enter.");
+            alert("I have a secret to tell you.");
+            alert("You are the best thing that ever happened to me.");
+            
+            document.getElementById('landing').style.transform = 'translateY(-100%)';
+            
+            // Start Music
+            song.play().then(() => {
+                document.body.classList.remove('music-paused');
+                disc.style.animationPlayState = 'running';
+            }).catch(() => {
+                // If it fails, the pulsing indicator will show
+                console.log("Audio blocked by browser.");
+            });
+        }
+
+        function toggleMusic() {
+            if (song.paused) {
+                song.play();
+                disc.style.animationPlayState = 'running';
+                document.body.classList.remove('music-paused');
+            } else {
+                song.pause();
+                disc.style.animationPlayState = 'paused';
+                document.body.classList.add('music-paused');
+            }
+        }
+
+        function nextPage() {
+            alert("Ready for Chapter Two?");
+            document.getElementById('page1').classList.replace('active', 'hidden-up');
+            document.getElementById('page2').classList.replace('hidden-down', 'active');
+        }
+
+        function prevPage() {
+            document.getElementById('page2').classList.replace('active', 'hidden-down');
+            document.getElementById('page1').classList.replace('hidden-up', 'active');
+        }
+
+        function confirmRSVP() {
+            alert("Yay! I can't wait to see you on the 4th, Sayang! ❤️");
+            // Change YOUR_PHONE to your actual number (e.g., 60123456789)
+            window.location.href = "https://wa.me/YOUR_PHONE?text=I%20accept!%20See%20you%20Sayang!%20❤️";
+        }
+
+        const reasons = [
+            "Your laugh is my absolute favorite sound.",
+            "The way you handle my moods with so much grace.",
+            "Your ambition and the way you dream for us.",
+            "How safe I feel when I'm tucked into your side.",
+            "The way you call me 'Sayang' and it sounds like home.",
+            "Your amazing taste in music (Wave to Earth!).",
+            "How you always know what I'm thinking without a word.",
+            "Your quiet kindness that most people never see.",
+            "The way you look at me when I'm not noticing.",
+            "Simply because you are Harith Haziq. 💖"
+        ];
+
+        const grid = document.getElementById('reasonGrid');
+        reasons.forEach((r, i) => {
+            const el = document.createElement('div');
+            el.className = 'reason-circle';
+            el.innerText = i + 1;
+            el.onclick = () => {
+                document.querySelectorAll('.reason-circle').forEach(c => c.classList.remove('selected'));
+                el.classList.add('selected');
+                document.getElementById('reasonText').innerText = r;
+            };
+            grid.appendChild(el);
+        });
+    </script>
+</body>
+</html>
