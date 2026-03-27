@@ -70,7 +70,7 @@
         .seal::after { content: 'HH'; color: var(--gold-leaf); font-family: 'Dancing Script'; font-size: 1.5rem; }
         .envelope.open .seal { opacity: 0; }
 
-        #lock-screen { position: fixed; inset: 0; background: var(--deep-navy); z-index: 1500; display: none; flex-direction: column; align-items: center; justify-content: center; transition: 0.5s; }
+        #lock-screen { position: fixed; inset: 0; background: var(--deep-navy); z-index: 1500; display: none; flex-direction: column; align-items: center; justify-content: center; transition: 0.5s; opacity: 1; }
         .passcode-container { background: var(--parchment); padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); width: 85%; max-width: 320px; }
         .passcode-dots { display: flex; gap: 15px; justify-content: center; margin: 20px 0; }
         .dot { width: 15px; height: 15px; border: 2px solid var(--romance-red); border-radius: 50%; }
@@ -229,11 +229,10 @@
         const celebrationDate = new Date("April 4, 2026 00:00:00").getTime();
         
         let lastAlertTime = 0;
-        let hasAccepted = false; 
+        let hasAccepted = localStorage.getItem('harith_accepted') === 'true'; 
 
         function updateTimers() {
             const now = new Date().getTime();
-            
             const bGap = bdayDate - now;
             if (bGap > 0) {
                 document.getElementById('days1').innerText = Math.floor(bGap / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
@@ -241,7 +240,6 @@
                 document.getElementById('mins1').innerText = Math.floor((bGap % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
                 document.getElementById('secs1').innerText = Math.floor((bGap % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }
-
             const cGap = celebrationDate - now;
             if (cGap <= 0) {
                 document.getElementById('celebrationTimer').innerHTML = "<p class='cursive' style='color:var(--romance-red); margin:0;'>Today is the day, Sayang! ❤️</p>";
@@ -318,7 +316,7 @@
         }
         function clearCode() { currentInput = ""; updateDots(); }
 
-       function unlock() {
+        function unlock() {
             localStorage.setItem('harith_unlocked', 'true');
             document.getElementById('lock-screen').style.opacity = '0';
             setTimeout(() => {
@@ -326,18 +324,15 @@
                 const main = document.getElementById('mainContent');
                 main.style.display = 'block';
                 setTimeout(() => main.style.opacity = '1', 50);
-                
                 initScratch("c1"); initScratch("c2"); initScratch("c3");
-                
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#8b0000'] });
                 startPetals();
-
-                // Instruction if he hasn't accepted yet
                 if(!hasAccepted) {
                     alert("Welcome to the celebration page! \n\nStep 1: Click 'Accept My Invitation' at the bottom.\nStep 2: Come back to this same link on April 4th to scratch and reveal your surprises!");
                 }
             }, 500);
         }
+
         function initScratch(id) {
             const canvas = document.getElementById(id);
             if(!canvas) return;
@@ -396,25 +391,12 @@
             }
         }
 
-    function sendLove() {
+        function sendLove() {
             hasAccepted = true; 
             localStorage.setItem('harith_accepted', 'true');
-            
-            if (successSfx) { 
-                successSfx.currentTime = 0; 
-                successSfx.play().catch(e => console.log("Sound error")); 
-            }
-            
-            confetti({ 
-                particleCount: 150, 
-                spread: 70, 
-                origin: { y: 0.6 }, 
-                colors: ['#d4af37', '#8b0000', '#ffffff'] 
-            });
-
-            // CUSTOM INSTRUCTION POPUP
+            if (successSfx) { successSfx.currentTime = 0; successSfx.play().catch(e => console.log("Sound error")); }
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#8b0000', '#ffffff'] });
             alert("Invitation Accepted, Sayang! ❤️\n\nI've saved your spot! Now, keep this link safe. Open it again on April 4th to reveal the scratch-off surprises and our full schedule!");
-
             const yourNumber = "60193452610"; 
             const message = encodeURIComponent("Sayang! I accept the invitation! I've saved the link and I'll open it again on April 4th! ❤️");
             window.open(`https://wa.me/${yourNumber}?text=${message}`, '_blank');
@@ -432,29 +414,24 @@
             }, 700);
         }
 
-        // Logic to remember the user and jump to tentative on April 4th
-        window.addEventListener('load', () => {
+        // IMPROVED SAFARI AUTO-SKIP LOGIC
+        function checkStatus() {
             const isUnlocked = localStorage.getItem('harith_unlocked');
-            const isAccepted = localStorage.getItem('harith_accepted');
-            
             if (isUnlocked === 'true') {
                 document.getElementById('landing').style.display = 'none';
                 document.getElementById('page1').style.display = 'none';
                 document.getElementById('envelope-container').style.display = 'none';
                 document.getElementById('lock-screen').style.display = 'none';
-                
                 const main = document.getElementById('mainContent');
                 main.style.display = 'block';
                 main.style.opacity = '1';
-                
-                if (isAccepted === 'true') { hasAccepted = true; }
-                
                 initScratch("c1"); initScratch("c2"); initScratch("c3");
                 startPetals();
-                // Browsers usually need a tap for music, but we try anyway
                 song.play().then(() => { disc.style.animationPlayState = 'running'; }).catch(() => {});
             }
-        });
+        }
+        window.addEventListener('DOMContentLoaded', checkStatus);
+        window.addEventListener('load', checkStatus);
     </script>
 </body>
 </html>
