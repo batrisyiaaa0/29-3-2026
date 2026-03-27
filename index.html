@@ -180,6 +180,9 @@
 
     <div class="content-scroll" id="mainContent">
         <div class="card-container">
+            <button class="btn" style="background: transparent; border: 1px solid var(--accent); color: var(--accent); margin-bottom: 20px; width: auto; font-size: 0.6rem;" onclick="goBackToLetter()">
+                ← Back to My Letter
+            </button>
             <div class="instruction-banner">⚠️ MUST CLICK "ACCEPT MY INVITATION" BELOW FIRST TO UNLOCK THE SURPRISES!</div>
             
             <div class="celebration-timer-box" id="celebrationTimer">
@@ -284,7 +287,26 @@
 
         function goToInvitation() {
             document.getElementById('page1').classList.replace('active', 'hidden-up');
-            document.getElementById('envelope-container').style.display = 'flex';
+            if (localStorage.getItem('harith_unlocked') === 'true') {
+                const main = document.getElementById('mainContent');
+                main.style.display = 'block';
+                setTimeout(() => main.style.opacity = '1', 50);
+                initScratch("c1"); initScratch("c2"); initScratch("c3");
+                startPetals();
+            } else {
+                document.getElementById('envelope-container').style.display = 'flex';
+            }
+        }
+
+        function goBackToLetter() {
+            const main = document.getElementById('mainContent');
+            main.style.opacity = '0';
+            setTimeout(() => {
+                main.style.display = 'none';
+                document.getElementById('page1').classList.remove('hidden-up');
+                document.getElementById('page1').classList.add('active');
+                window.scrollTo(0, 0);
+            }, 500);
         }
 
         const CORRECT_CODE = "2903"; 
@@ -356,7 +378,7 @@
                     isDrawing = false; return;
                 }
                 const now = new Date();
-                const unlockDate = new Date("April 4, 2026 00:00:00");
+                const unlockDate = new Date("March 28, 2026 00:00:00");
                 if (now < unlockDate) {
                     if (nowTime - lastAlertTime > 5000) {
                         alert("Great job accepting! But wait... these surprises only reveal themselves on April 4th! See you then! 😍");
@@ -398,7 +420,7 @@
             confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#8b0000', '#ffffff'] });
             alert("Invitation Accepted, Sayang! ❤️\n\nI've saved your spot! Now, keep this link safe. Open it again on April 4th to reveal the scratch-off surprises and our full schedule!");
             const yourNumber = "60193452610"; 
-            const message = encodeURIComponent("Baby! I accept the invitation! I've saved the link and I'll open it again on April 4th! ❤️");
+            const message = encodeURIComponent("Sayang! I accept the invitation! I've saved the link and I'll open it again on April 4th! ❤️");
             window.open(`https://wa.me/${yourNumber}?text=${message}`, '_blank');
         }
 
@@ -414,8 +436,7 @@
             }, 700);
         }
 
-        // IMPROVED SAFARI AUTO-SKIP LOGIC
-        function checkStatus() {
+        window.onload = () => {
             const isUnlocked = localStorage.getItem('harith_unlocked');
             if (isUnlocked === 'true') {
                 document.getElementById('landing').style.display = 'none';
@@ -427,11 +448,8 @@
                 main.style.opacity = '1';
                 initScratch("c1"); initScratch("c2"); initScratch("c3");
                 startPetals();
-                song.play().then(() => { disc.style.animationPlayState = 'running'; }).catch(() => {});
             }
-        }
-        window.addEventListener('DOMContentLoaded', checkStatus);
-        window.addEventListener('load', checkStatus);
+        };
     </script>
 </body>
 </html>
