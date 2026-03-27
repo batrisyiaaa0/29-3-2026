@@ -303,8 +303,10 @@
             main.style.opacity = '0';
             setTimeout(() => {
                 main.style.display = 'none';
-                document.getElementById('page1').classList.remove('hidden-up');
-                document.getElementById('page1').classList.add('active');
+                const p1 = document.getElementById('page1');
+                p1.style.display = 'flex';
+                p1.classList.remove('hidden-up');
+                p1.classList.add('active');
                 window.scrollTo(0, 0);
             }, 500);
         }
