@@ -2,239 +2,216 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>A Private Note for Harith Haziq 🌊</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Invitation for Sayang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --primary: #6b0f1a; --accent: #b8926a; --paper: #fef7e9; --glass: rgba(254, 247, 233, 0.9);
-            --romance-red: #8b0000; --gold-leaf: #d4af37; --parchment: #fdfaf7; --deep-navy: #050a14; --envelope-bg: #6b0f1a;
+            --romance-red: #6b0f1a;
+            --gold-leaf: #b8926a;
+            --cream-silk: #fef7e9;
+            --deep-slate: #2c3e50;
         }
 
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
-            font-family: 'Poppins', sans-serif; background-color: #fdfaf7;
-            color: #2c2c2c; overflow-x: hidden; touch-action: manipulation;
+            font-family: 'Poppins', sans-serif; background: var(--cream-silk);
+            overflow-x: hidden; color: var(--deep-slate);
         }
 
-        #landing {
-            position: fixed; inset: 0; background-color: #2c080b;
-            background-image: linear-gradient(rgba(107, 15, 26, 0.8), rgba(107, 15, 26, 0.9)),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiIHZpZXdCb3g9IjAgMCA0IDQiPjxnIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iIzVjMDIwOSIgZmlsbC1vcGFjaXR5PSIwLjIyIj48cGF0aCBkPSJNMCAwaDF2MUgwVjB6bTIgMGgxdjFIMlYwek0wIDJoMXYxSDBWMnpNMiAyaDF2MUgyVjJ6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: transform 1.2s cubic-bezier(0.8, 0, 0.2, 1); text-align: center; padding: 5vw;
+        .cursive { font-family: 'Dancing Script', cursive; }
+
+        .screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: transform 1s ease-in-out, opacity 1s ease; z-index: 10;
         }
-        .envelope-wrapper { font-size: clamp(4rem, 15vw, 7rem); filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5)); animation: elegantFloat 5s ease-in-out infinite; cursor: pointer; margin-bottom: 2vh; }
-        @keyframes elegantFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        .landing-countdown { display: flex; gap: 10px; margin-bottom: 30px; background: rgba(255, 255, 255, 0.05); padding: 10px 15px; border-radius: 4px; backdrop-filter: blur(10px); border: 1px solid rgba(184, 146, 106, 0.3); max-width: 90%; }
-        .unit { text-align: center; flex: 1; min-width: 45px; }
-        .num { display: block; font-weight: 500; font-size: clamp(1rem, 4vw, 1.4rem); color: #fdfaf7; letter-spacing: 1px; }
-        .lab { font-size: 0.55rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; }
 
-        .music-player { position: fixed; top: 15px; right: 15px; z-index: 2500; display: flex; align-items: center; background: var(--glass); padding: 5px 12px 5px 5px; border-radius: 50px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); border: 1px solid rgba(184, 146, 106, 0.2); backdrop-filter: blur(8px); max-width: 150px; }
-        .disc { width: 30px; height: 30px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 8px; animation: spin 4s linear infinite; animation-play-state: paused; border: 1px solid var(--accent); }
-        @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-
-        .page-container { width: 100%; height: 100%; position: relative; }
-        .page { position: absolute; inset: 0; padding: 70px 5% 40px; box-sizing: border-box; overflow-y: auto; display: flex; flex-direction: column; align-items: center; transition: 0.9s cubic-bezier(0.65, 0, 0.35, 1); }
-        .active { opacity: 1; transform: translateY(0); pointer-events: auto; }
-        .hidden-up { opacity: 0; transform: translateY(-50px); pointer-events: none; }
+        #landing { background: var(--romance-red); color: white; text-align: center; }
         
-        .letter-paper { background-color: var(--paper); background-image: linear-gradient(rgba(254, 247, 233, 0.6), rgba(254, 247, 233, 0.8)), url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiIHZpZXdCb3g9IjAgMCA0IDQiPjxnIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgZmlsbD0iI2I4OTI2YSIgZmlsbC1vcGFjaXR5PSIwLjA1Ij48cGF0aCBkPSJNMCAwaDF2MUgwVjB6bTIgMGgxdjFIMlYwek0wIDJoMXYxSDBWMnpNMiAyaDF2MUgyVjJ6Ii8+PC9nPjwvZz48L3N2Zz4='); border-radius: 2px; padding: clamp(20px, 8vw, 40px); width: 90%; max-width: 450px; box-shadow: 20px 20px 60px rgba(0,0,0,0.05); margin-bottom: 30px; position: relative; }
-        h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 5vw, 1.8rem); margin: 15px 0; color: var(--primary); font-weight: 700; text-align: center; }
-        .cursive { font-family: 'Dancing Script', cursive; font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--accent); }
-        .letter-content { font-family: 'Playfair Display', serif; line-height: 1.6; font-size: clamp(0.95rem, 3.5vw, 1.1rem); color: #3d3d3d; text-align: justify; }
+        #page1 { background: white; padding: 20px; text-align: center; opacity: 0; pointer-events: none; }
+        #page1.active { opacity: 1; pointer-events: auto; }
 
-        .reasons-stack { width: 90%; max-width: 450px; margin-bottom: 30px; position: relative; padding: 20px; background: var(--paper); border: 1px solid rgba(184, 146, 106, 0.2); box-shadow: 10px 10px 30px rgba(0,0,0,0.03); box-sizing: border-box; }
-        .stack-title { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; text-align: center; color: var(--accent); margin-bottom: 20px; }
-        #miniGrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(5px, 2vw, 12px); }
-        .mini-envelope { aspect-ratio: 1.3; background: #fff6e8; border: 1px solid rgba(184, 146, 106, 0.4); cursor: pointer; position: relative; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; font-family: 'Dancing Script', cursive; color: var(--accent); font-size: clamp(0.8rem, 3vw, 1.1rem); }
-        .mini-envelope::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: rgba(184, 146, 106, 0.1); border-bottom: 1px solid rgba(184, 146, 106, 0.2); clip-path: polygon(0 0, 100% 0, 50% 100%); }
-        .mini-envelope:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        #envelope-container { display: none; background: #f4e4d4; }
+        .envelope {
+            width: 280px; height: 180px; background: #d4af37; position: relative;
+            cursor: pointer; transform-style: preserve-3d; transition: transform 0.8s;
+        }
+        .envelope.open { transform: rotateX(-20deg); }
+        .flap {
+            position: absolute; top: 0; width: 0; height: 0;
+            border-left: 140px solid transparent; border-right: 140px solid transparent;
+            border-top: 100px solid #b8860b; transform-origin: top; transition: 0.5s; z-index: 2;
+        }
+        .envelope.open .flap { transform: rotateX(180deg); }
+        .letter-preview {
+            position: absolute; bottom: 10px; left: 10px; right: 10px; height: 150px;
+            background: white; z-index: 1; transition: 0.5s; text-align: center; padding: 10px;
+        }
+        .envelope.open .letter-preview { transform: translateY(-50px); }
 
-        #reasonPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 3500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.5s; }
-        #reasonPopup.active { opacity: 1; pointer-events: auto; }
-        .popup-paper { background-color: var(--paper); padding: 30px; width: 80%; max-width: 350px; text-align: center; border: 1px solid var(--accent); transform: scale(0.8) rotate(-5deg); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        #reasonPopup.active .popup-paper { transform: scale(1) rotate(0deg); }
+        #lock-screen { display: none; background: rgba(0,0,0,0.9); color: white; }
+        .lock-box { background: #222; padding: 30px; border-radius: 20px; border: 2px solid var(--gold-leaf); text-align: center; }
+        .dots { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        .dot { width: 15px; height: 15px; border: 2px solid var(--gold-leaf); border-radius: 50%; }
+        .dot.filled { background: var(--gold-leaf); }
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .key { width: 60px; height: 60px; border: 1px solid #444; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; }
+        .key:active { background: var(--gold-leaf); }
 
-        .btn { background: var(--primary); color: #fff; padding: 12px 30px; border: none; font-family: 'Poppins'; letter-spacing: 1px; font-weight: 500; font-size: 0.75rem; cursor: pointer; text-transform: uppercase; width: fit-content; margin: 0 auto; display: block; transition: 0.3s; }
-        .btn:hover { background: #4a0a12; transform: translateY(-2px); }
+        #mainContent { display: none; padding: 20px; text-align: center; overflow-y: auto; height: 100vh; background: white; }
+        .scratch-card {
+            width: 100%; max-width: 300px; height: 150px; margin: 20px auto;
+            position: relative; border: 3px dashed var(--gold-leaf); border-radius: 15px;
+        }
+        .scratch-content {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center; background: #fff9f0; border-radius: 12px;
+        }
+        canvas { position: absolute; top: 0; left: 0; z-index: 5; touch-action: none; cursor: crosshair; }
 
-        #envelope-container { position: fixed; inset: 0; z-index: 2000; background: var(--deep-navy); display: none; align-items: center; justify-content: center; transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1); }
-        .envelope { position: relative; width: 90vw; max-width: 380px; height: 230px; background: var(--envelope-bg); box-shadow: 0 20px 50px rgba(0,0,0,0.8); cursor: pointer; }
-        .flap { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--envelope-bg); clip-path: polygon(0 0, 50% 50%, 100% 0); z-index: 3; transition: 0.6s; transform-origin: top; border-top: 1px solid var(--gold-leaf); }
-        .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
-        .pocket { position: absolute; inset: 0; background: var(--envelope-bg); clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%); z-index: 4; }
-        .seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 75px; height: 75px; background: var(--romance-red); border-radius: 50%; border: 2px solid #5a0000; z-index: 5; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.5); transition: 0.4s; }
-        .seal::after { content: 'HH'; color: var(--gold-leaf); font-family: 'Dancing Script'; font-size: 1.5rem; }
-        .envelope.open .seal { opacity: 0; }
+        .music-player { position: fixed; top: 20px; right: 20px; z-index: 100; cursor: pointer; }
+        .disc { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #333; animation: spin 3s linear infinite; animation-play-state: paused; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        #lock-screen { position: fixed; inset: 0; background: var(--deep-navy); z-index: 1500; display: none; flex-direction: column; align-items: center; justify-content: center; transition: 0.5s; }
-        .passcode-container { background: var(--parchment); padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); width: 85%; max-width: 320px; }
-        .passcode-dots { display: flex; gap: 15px; justify-content: center; margin: 20px 0; }
-        .dot { width: 15px; height: 15px; border: 2px solid var(--romance-red); border-radius: 50%; }
-        .dot.filled { background: var(--romance-red); }
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
-        .key { width: 60px; height: 60px; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display'; font-size: 1.2rem; cursor: pointer; color: #333; }
-        .key:active { background: #eee; }
-        .error-shake { animation: shake 0.4s; }
+        .btn {
+            background: var(--romance-red); color: white; border: none; padding: 12px 30px;
+            border-radius: 25px; font-weight: 600; cursor: pointer; margin-top: 20px;
+        }
+        .petal { position: fixed; top: -10%; z-index: 99; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        
+        .error-shake { animation: shake 0.3s; }
         @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 
-        .content-scroll { position: fixed; inset: 0; background: var(--deep-navy); height: 100vh; overflow-y: auto; opacity: 0; transition: 1s; padding-bottom: 60px; display: none; z-index: 1000; }
-        .card-container { width: 90%; max-width: 450px; margin: 35px auto; background: var(--parchment); padding: 45px 25px; background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.5); border-radius: 2px; }
-        .agenda { text-align: left; margin-top: 30px; }
-        .love-step { margin-bottom: 35px; border-left: 1px solid rgba(212, 175, 55, 0.3); padding-left: 15px; }
-        .step-label { font-family: 'Dancing Script'; font-size: 1.3rem; color: var(--gold-leaf); display: block; }
-        .step-text { font-family: 'Playfair Display'; font-size: 1rem; color: #333; line-height: 1.4; margin-bottom: 8px; display: block; }
-        .scratch-box { position: relative; width: 100%; height: 80px; background: #fff; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); }
-        .prize-text { font-family: 'Dancing Script'; font-size: 1.3rem; color: var(--romance-red); position: absolute; z-index: 1; }
-        canvas { position: absolute; top: 0; left: 0; z-index: 10; touch-action: none; cursor: crosshair; }
-        .btn-love { background: var(--romance-red); color: white; border: none; padding: 18px 0; font-family: 'Playfair Display'; width: 100%; margin-top: 30px; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; }
-        
-        .instruction-banner { font-size: 0.65rem; color: var(--gold-leaf); letter-spacing: 1px; margin-bottom: 15px; border: 1px dashed var(--gold-leaf); padding: 8px; animation: pulseFade 2s infinite; }
-        @keyframes pulseFade { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-
-        .petal { position: fixed; top: -10%; z-index: 1500; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
-        /* Timer Styling */
-        .celebration-timer-box { background: #fdfaf7; padding: 12px; border: 1px solid var(--gold-leaf); margin-bottom: 25px; border-radius: 4px; }
-        .timer-grid { display: flex; justify-content: center; gap: 12px; font-family: 'Playfair Display'; color: var(--romance-red); font-weight: bold; font-size: 1.1rem; }
+        .reset-link { margin-top: 50px; font-size: 0.7rem; color: #ccc; cursor: pointer; text-decoration: underline; display: block; padding-bottom: 20px;}
     </style>
 </head>
 <body>
 
-    <audio id="loveSong" loop preload="auto"><source src="bad.mp3" type="audio/mp3"></audio>
-    <audio id="sparkleSfx" preload="auto"><source src="https://pixabay.com/static/audio/2022/03/15/audio_24911d3395.mp3" type="audio/mp3"></audio>
-    <audio id="successSfx" preload="auto"><source src="success.mp3" type="audio/mp3"></audio>
-
-    <div id="landing">
-        <div class="envelope-wrapper" onclick="startExperience()">✉️</div>
-        <p style="color: rgba(255,255,255,0.7); font-size: 0.6rem; letter-spacing: 3px; margin: 0 0 5px; text-transform: uppercase;">Private Invitation</p>
-        <h2 class="cursive" style="margin-bottom: 25px; color: var(--accent);">Harith Haziq</h2>
-        <div class="landing-countdown" id="bdayTimer">
-            <div class="unit"><span class="num" id="days1">00</span><span class="lab">Days</span></div>
-            <div class="unit"><span class="num" id="hours1">00</span><span class="lab">Hrs</span></div>
-            <div class="unit"><span class="num" id="mins1">00</span><span class="lab">Min</span></div>
-            <div class="unit"><span class="num" id="secs1">00</span><span class="lab">Sec</span></div>
-        </div>
-        <button class="btn" style="background: transparent; border: 1px solid var(--accent); color: var(--accent);" onclick="startExperience()">Break Seal & Open Letter</button>
-    </div>
+    <audio id="loveSong" loop><source src="song.mp3" type="audio/mpeg"></audio>
+    <audio id="sparkleSfx"><source src="sparkle.mp3" type="audio/mpeg"></audio>
+    <audio id="successSfx"><source src="success.mp3" type="audio/mpeg"></audio>
 
     <div class="music-player" onclick="toggleMusic()">
-        <div class="disc" id="disc">W2E</div>
-        <div style="margin-left: 10px; font-size: 0.6rem; color: #555; white-space: nowrap; overflow: hidden;">
-            <b style="color: var(--primary);">Bad</b><br>Wave to Earth
-        </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/1754/1754117.png" class="disc" id="disc" alt="Music">
     </div>
 
-    <div class="page-container">
-        <div id="page1" class="page active">
-            <span class="cursive">March 29th, 2026</span>
-            <div class="letter-paper">
-                <h1>To My Dearest Sayang</h1>
-                <div class="letter-content">
-                    My dearest Sayang,<br><br>
-                    I’m really thankful to have you in my life. Sometimes I stop and wonder how I got so lucky to walk this path with you, but then I realize you aren't just a part of my life, you are the very heart of it.<br><br>
-                    To the world, you might be one person, but to me, you are the peace in my chaos, the melody in my silence, and the only home I ever want to return to.<br><br>
-                    Thank you for every sacrifice you make and for every ounce of effort you put in. You are my constant, my anchor, and my greatest "thank you" to the universe.<br><br>
-                    Happy Birthday, sayang. As March 29th approaches, I’m so grateful the world was gifted with you.<br><br>
-                    I am yours, today and for every tomorrow.
-                </div>
-                <p style="text-align: right; margin-top: 30px; color: var(--primary); font-family: 'Dancing Script'; font-size: 1.4rem;">Always yours, Me</p>
-            </div>
-            <div class="reasons-stack">
-                <h3 class="stack-title">10 Reasons You're My World</h3>
-                <div id="miniGrid"></div>
-            </div>
-            <button class="btn" onclick="goToInvitation()">Celebration Details ➔</button>
-            <div style="height: 60px;"></div>
+    <div class="screen" id="landing">
+        <h1 class="cursive" style="font-size: 3.5rem;">For You, Sayang.</h1>
+        <div id="bday-timer" style="font-size: 1.2rem; margin-bottom: 20px;">
+            <span id="days1">00</span>d : <span id="hours1">00</span>h : <span id="mins1">00</span>m : <span id="secs1">00</span>s
         </div>
+        <button class="btn" onclick="startExperience()">Open Your Gift</button>
     </div>
 
-    <div id="envelope-container">
+    <div class="screen" id="page1">
+        <h2 class="cursive" style="color: var(--romance-red); font-size: 2.5rem;">To My Dearest Harith,</h2>
+        <p style="max-width: 80%; line-height: 1.8;">
+            They say the best things in life are worth waiting for. 
+            Since your birthday is finally here, I wanted to create something just as special as you are.
+        </p>
+        <p class="cursive" style="font-size: 1.5rem;">Click the grid for 10 reasons why I love you:</p>
+        <div id="miniGrid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 20px 0;"></div>
+        <button class="btn" onclick="goToInvitation()">See Your Invitation</button>
+    </div>
+
+    <div class="screen" id="envelope-container">
         <div class="envelope" id="env" onclick="openEnvelope()">
             <div class="flap"></div>
-            <div class="pocket"></div>
-            <div class="seal"></div>
-            <p style="position:absolute; bottom:-40px; width:100%; text-align:center; color:white; font-size:0.7rem; letter-spacing:2px;">TAP TO UNWRAP</p>
+            <div class="letter-preview">
+                <p class="cursive" style="margin: 0; font-size: 1.2rem;">You're Invited!</p>
+                <p style="font-size: 0.7rem;">(Click to reveal passcode)</p>
+            </div>
         </div>
     </div>
 
-    <div id="lock-screen">
-        <div class="passcode-container" id="lock-box">
-            <p class="cursive" style="font-size: 1.2rem; color: var(--romance-red);">Enter Your Birthday Date</p>
-            <div class="passcode-dots">
-                <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-            </div>
+    <div class="screen" id="lock-screen">
+        <div class="lock-box" id="lock-box">
+            <h3 class="cursive" style="color: var(--gold-leaf);">Enter Our Date (DDMM)</h3>
+            <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
             <div class="keypad">
-                <div class="key" onclick="press(1)">1</div><div class="key" onclick="press(2)">2</div><div class="key" onclick="press(3)">3</div>
-                <div class="key" onclick="press(4)">4</div><div class="key" onclick="press(5)">5</div><div class="key" onclick="press(6)">6</div>
-                <div class="key" onclick="press(7)">7</div><div class="key" onclick="press(8)">8</div><div class="key" onclick="press(9)">9</div>
-                <div class="key" style="border:none;"></div><div class="key" onclick="press(0)">0</div>
-                <div class="key" onclick="clearCode()" style="font-size: 0.8rem; color: gray; border:none;">CLR</div>
+                <div class="key" onclick="press('1')">1</div><div class="key" onclick="press('2')">2</div><div class="key" onclick="press('3')">3</div>
+                <div class="key" onclick="press('4')">4</div><div class="key" onclick="press('5')">5</div><div class="key" onclick="press('6')">6</div>
+                <div class="key" onclick="press('7')">7</div><div class="key" onclick="press('8')">8</div><div class="key" onclick="press('9')">9</div>
+                <div class="key" style="visibility:hidden"></div><div class="key" onclick="press('0')">0</div><div class="key" onclick="clearCode()">C</div>
             </div>
         </div>
     </div>
 
-    <div class="content-scroll" id="mainContent">
-        <div class="card-container">
-            <div class="instruction-banner">⚠️ MUST CLICK "ACCEPT MY INVITATION" BELOW FIRST TO UNLOCK THE SURPRISES!</div>
-            
-            <div class="celebration-timer-box" id="celebrationTimer">
-                <p style="font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 5px; color: #888;">Countdown to our Date:</p>
-                <div class="timer-grid">
-                    <span id="c-days">00</span>d : <span id="c-hours">00</span>h : <span id="c-mins">00</span>m : <span id="c-secs">00</span>s
-                </div>
-            </div>
+    <div id="mainContent">
+        <h1 class="cursive" style="color: var(--romance-red); font-size: 3rem; margin-bottom: 0;">Our Celebration Plan</h1>
+        <p style="color: var(--gold-leaf); margin-top: 5px;">April 4th, 2026</p>
+        
+        <div id="celebrationTimer" style="background: #fff5f5; padding: 15px; border-radius: 10px; display: inline-block; margin-bottom: 20px;">
+            <span id="c-days">00</span>d <span id="c-hours">00</span>h <span id="c-mins">00</span>m <span id="c-secs">00</span>s
+        </div>
 
-            <p class="cursive">For the one who holds my heart,</p>
-            <h1>Harith Haziq</h1>
-            <p style="font-size: 0.75rem; letter-spacing: 3px; color: #888; margin-top: 20px;">YOU ARE INVITED TO</p>
-            <p class="cursive" style="font-size: 1.5rem; margin-top: 5px;">Our Special Celebration</p>
-            <div class="divider">❦</div>
-            <p style="font-size: 0.95rem; font-family: 'Playfair Display'; color: var(--romance-red); font-weight: bold;">SATURDAY, APRIL 4TH 2026</p>
-            
-            <div class="agenda">
-                <div class="love-step"><span class="step-label">The Beginning</span><span class="step-text">I'll be there to pick you up and start our day.</span></div>
-                <div class="love-step"><span class="step-label">A Sweet Moment</span><span class="step-text">Sharing a beautiful light brunch together.</span></div>
-                <div class="love-step">
-                    <span class="step-label">Capturing Us</span><span class="step-text">A little surprise in Subang...</span>
-                    <div class="scratch-box"><span class="prize-text">📸 Photobooth Session</span><canvas id="c1"></canvas></div>
-                </div>
-                <div class="love-step">
-                    <span class="step-label">The Grand Feast</span><span class="step-text">A grand table just for us...</span>
-                    <div class="scratch-box"><span class="prize-text">🥩 Unlimited Wagyu & Seafood</span><canvas id="c2"></canvas></div>
-                </div>
-                <div class="love-step">
-                    <span class="step-label">The Forever</span><span class="step-text">The most precious gift of all...</span>
-                    <div class="scratch-box"><span class="prize-text">♾️ Quality Time & Endless Love</span><canvas id="c3"></canvas></div>
-                </div>
-            </div>
-            
-            <button class="btn-love" onclick="sendLove()">Accept My Invitation</button>
-            <p style="font-size: 0.6rem; color: #aaa; margin-top: 15px; letter-spacing: 1px;">"I CAN'T WAIT TO SEE YOU, SAYANG."</p>
+        <div class="scratch-card"><div class="scratch-content"><h3>📍 Secret Lunch Location</h3></div><canvas id="c1"></canvas></div>
+        <div class="scratch-card"><div class="scratch-content"><h3>🎬 Afternoon Activity</h3></div><canvas id="c2"></canvas></div>
+        <div class="scratch-card"><div class="scratch-content"><h3>🎁 Your Main Surprise</h3></div><canvas id="c3"></canvas></div>
+
+        <div style="margin-top: 40px; padding: 20px; border-top: 1px solid #eee;">
+            <p>Will you be mine that day?</p>
+            <button class="btn" onclick="sendLove()" style="background: #25D366;">Accept My Invitation ❤️</button>
+            <span class="reset-link" onclick="resetStorage()">Reset Experience (Admin Only)</span>
         </div>
     </div>
 
-    <div id="reasonPopup"><div class="popup-paper"><span class="cursive" style="font-size: 1.1rem; display: block; margin-bottom: 15px;">Why You're My World</span><p id="reasonText" style="font-family: 'Playfair Display'; line-height: 1.6; font-style: italic; color: var(--primary); font-size: 1rem; min-height: 50px; margin-bottom: 20px;"></p><button class="btn" style="font-size: 0.65rem; padding: 10px 20px;" onclick="closeReason()">Close Note</button></div></div>
+    <div id="reasonPopup" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 200; display: none; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 40px; border-radius: 20px; text-align: center; max-width: 80%;">
+            <p id="reasonText" class="cursive" style="font-size: 1.8rem; color: var(--romance-red);"></p>
+            <button class="btn" onclick="closeReason()">Close</button>
+        </div>
+    </div>
 
     <script>
         const song = document.getElementById('loveSong');
         const disc = document.getElementById('disc');
         const sparkle = document.getElementById('sparkleSfx');
         const successSfx = document.getElementById('successSfx');
-        const bdayDate = new Date("March 29, 2026 00:00:00").getTime();
+        
+        const bdayDate = new Date("March 27, 2026 00:00:00").getTime();
         const celebrationDate = new Date("April 4, 2026 00:00:00").getTime();
         
         let lastAlertTime = 0;
-        let hasAccepted = false; 
+        let hasAccepted = localStorage.getItem('invitationAccepted') === 'true'; 
+
+        window.onload = function() {
+            const now = new Date().getTime();
+            if (now >= celebrationDate && hasAccepted) {
+                skipToTentative();
+            }
+        };
+
+        function resetStorage() {
+            if(confirm("Are you sure you want to reset the memory? This will make the site think you haven't accepted yet.")) {
+                localStorage.removeItem('invitationAccepted');
+                location.reload();
+            }
+        }
+
+        function skipToTentative() {
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('page1').style.display = 'none';
+            document.getElementById('envelope-container').style.display = 'none';
+            document.getElementById('lock-screen').style.display = 'none';
+            
+            const main = document.getElementById('mainContent');
+            main.style.display = 'block';
+            main.style.opacity = '1';
+            
+            initScratch("c1"); initScratch("c2"); initScratch("c3");
+            startPetals();
+            
+            document.body.addEventListener('click', () => {
+                song.play().then(() => { disc.style.animationPlayState = 'running'; });
+            }, { once: true });
+        }
 
         function updateTimers() {
             const now = new Date().getTime();
-            
-            // Birthday Timer logic
             const bGap = bdayDate - now;
             if (bGap > 0) {
                 document.getElementById('days1').innerText = Math.floor(bGap / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
@@ -243,7 +220,6 @@
                 document.getElementById('secs1').innerText = Math.floor((bGap % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }
 
-            // Celebration Timer logic
             const cGap = celebrationDate - now;
             if (cGap <= 0) {
                 document.getElementById('celebrationTimer').innerHTML = "<p class='cursive' style='color:var(--romance-red); margin:0;'>Today is the day, Sayang! ❤️</p>";
@@ -256,21 +232,22 @@
         }
         setInterval(updateTimers, 1000);
 
-        async function startExperience() {
+        function startExperience() {
             alert("Wait... before you enter."); alert("I have a secret to tell you."); alert("You are the best thing that ever happened to me.");
             document.getElementById('landing').style.transform = 'translateY(-100%)';
+            document.getElementById('page1').classList.add('active');
             song.play().then(() => { disc.style.animationPlayState = 'running'; }).catch(() => {});
             triggerConfetti();
-        }
-
-        function triggerConfetti() {
-            sparkle.currentTime = 0; sparkle.play().catch(() => {});
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#6b0f1a', '#b8926a', '#fef7e9', '#2c3e50'] });
         }
 
         function toggleMusic() {
             if (song.paused) { song.play(); disc.style.animationPlayState = 'running'; }
             else { song.pause(); disc.style.animationPlayState = 'paused'; }
+        }
+
+        function triggerConfetti() {
+            sparkle.currentTime = 0; sparkle.play().catch(() => {});
+            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#6b0f1a', '#b8926a'] });
         }
 
         const reasons = [
@@ -280,14 +257,14 @@
         ];
         const grid = document.getElementById('miniGrid');
         reasons.forEach((r, i) => {
-            const el = document.createElement('div'); el.className = 'mini-envelope'; el.innerText = i + 1;
-            el.onclick = () => { document.getElementById('reasonText').innerText = r; document.getElementById('reasonPopup').classList.add('active'); };
+            const el = document.createElement('div'); el.className = 'key'; el.style.width='45px'; el.style.height='45px'; el.innerText = i + 1;
+            el.onclick = () => { document.getElementById('reasonText').innerText = r; document.getElementById('reasonPopup').style.display = 'flex'; };
             grid.appendChild(el);
         });
-        function closeReason() { document.getElementById('reasonPopup').classList.remove('active'); }
+        function closeReason() { document.getElementById('reasonPopup').style.display = 'none'; }
 
         function goToInvitation() {
-            document.getElementById('page1').classList.replace('active', 'hidden-up');
+            document.getElementById('page1').style.transform = 'translateY(-100%)';
             document.getElementById('envelope-container').style.display = 'flex';
         }
 
@@ -316,7 +293,7 @@
         }
         function handleError() {
             const box = document.getElementById('lock-box'); box.classList.add('error-shake');
-            setTimeout(() => { box.classList.remove('error-shake'); clearCode(); }, 500);
+            setTimeout(() => { box.classList.remove('error-shake'); currentInput = ""; updateDots(); }, 500);
         }
         function clearCode() { currentInput = ""; updateDots(); }
 
@@ -328,41 +305,30 @@
                 main.style.display = 'block';
                 setTimeout(() => main.style.opacity = '1', 50);
                 initScratch("c1"); initScratch("c2"); initScratch("c3");
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#d4af37', '#8b0000'] });
-                setTimeout(() => { alert("Sayang, don't forget! You must click 'Accept My Invitation' at the bottom first or you won't be able to scratch the surprises!"); }, 1000);
+                startPetals();
+                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             }, 500);
         }
 
         function initScratch(id) {
             const canvas = document.getElementById(id);
+            if (!canvas) return;
             const ctx = canvas.getContext('2d', { willReadFrequently: true });
             const parent = canvas.parentElement;
             canvas.width = parent.offsetWidth; canvas.height = parent.offsetHeight;
             ctx.fillStyle = '#8b0000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(212, 175, 55, 0.2)';
-            for(let i=0; i<30; i++) ctx.fillText('❦', Math.random()*canvas.width, Math.random()*canvas.height);
-            ctx.fillStyle = '#fff'; ctx.font = '600 10px Poppins'; ctx.textAlign = 'center';
+            ctx.fillStyle = '#fff'; ctx.font = '600 12px Poppins'; ctx.textAlign = 'center';
             ctx.fillText('LOCKED 🔒', canvas.width/2, canvas.height/2 + 5);
 
             let isDrawing = false;
             function scratch(e) {
                 const nowTime = Date.now();
                 if (!hasAccepted) {
-                    if (nowTime - lastAlertTime > 5000) {
-                        alert("Step 1: Click the 'Accept My Invitation' button below first, Sayang! ❤️");
-                        lastAlertTime = nowTime;
-                    }
-                    isDrawing = false;
+                    if (nowTime - lastAlertTime > 5000) { alert("Accept the invitation below first! ❤️"); lastAlertTime = nowTime; }
                     return;
                 }
-                const now = new Date();
-                const unlockDate = new Date("April 4, 2026 00:00:00");
-                if (now < unlockDate) {
-                    if (nowTime - lastAlertTime > 5000) {
-                        alert("Great job accepting! But wait... these surprises only reveal themselves on April 4th! See you then! 😍");
-                        lastAlertTime = nowTime;
-                    }
-                    isDrawing = false;
+                if (new Date() < new Date("April 4, 2026 00:00:00")) {
+                    if (nowTime - lastAlertTime > 5000) { alert("Reveals on April 4th! 😍"); lastAlertTime = nowTime; }
                     return;
                 }
                 if (!isDrawing) return;
@@ -388,26 +354,18 @@
             if (cleared / (pixels.length / 4) > 0.45) {
                 canvas.style.transition = 'opacity 0.8s'; canvas.style.opacity = '0';
                 setTimeout(() => canvas.remove(), 800);
-                confetti({ particleCount: 40, spread: 60, origin: { y: 0.8 }, colors: ['#d4af37'] });
             }
         }
 
         function sendLove() {
             hasAccepted = true; 
-            if (successSfx) {
-                successSfx.currentTime = 0;
-                successSfx.play().catch(e => console.log("Sound error"));
-            }
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#d4af37', '#8b0000', '#ffffff']
-            });
-            const yourNumber = "60193452610"; 
-            const message = encodeURIComponent("Sayang! I accept the invitation! I can't wait for April 4th! ❤️");
-            alert("Invitation accepted! The surprises are now 'soft-unlocked'. You can scratch them starting April 4th! 😍");
-            window.open(`https://wa.me/${yourNumber}?text=${message}`, '_blank');
+            localStorage.setItem('invitationAccepted', 'true');
+            if (successSfx) { successSfx.play().catch(() => {}); }
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            
+            const message = encodeURIComponent("Sayang! I accept! I can't wait for April 4th! ❤️");
+            alert("Accepted! Now, come back on April 4th to see the plan! 😍");
+            window.open(`https://wa.me/60193451790?text=${message}`, '_blank');
         }
 
         function startPetals() {
@@ -421,8 +379,6 @@
                 setTimeout(() => p.remove(), 5000);
             }, 700);
         }
-        const originalUnlock = unlock;
-        unlock = function() { originalUnlock(); startPetals(); }
     </script>
 </body>
 </html>
